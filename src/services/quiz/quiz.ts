@@ -16,7 +16,13 @@ const mockGetAdmin = () => {
   return getQuestionAdmin;
 };
 
-export const createQuiz = async (userData: QuizCreate) => {
+const isAdminQuiz = () => {
+  return { body: true, code: 200 };
+};
+
+export const postCreateQuiz = async (
+  userData: QuizCreate
+): Promise<ApiResponse<QuizCreated>> => {
   if (process.env.REACT_APP_USEMOCK) {
     const mockResp = await new Promise<ApiResponse<QuizCreated>>((resolve) => {
       setTimeout(() => {
@@ -35,7 +41,7 @@ export const createQuiz = async (userData: QuizCreate) => {
   return handleRequest(response);
 };
 
-export const getQuiz = async (uuid: string) => {
+export const getQuiz = async (uuid: string): Promise<ApiResponse<Quiz>> => {
   if (process.env.REACT_APP_USEMOCK) {
     const mockResp = await new Promise<ApiResponse<Quiz>>((resolve) => {
       setTimeout(() => {
@@ -53,7 +59,9 @@ export const getQuiz = async (uuid: string) => {
   return handleRequest(response);
 };
 
-export const getAdminQuiz = async (uuid: string) => {
+export const getAdminQuiz = async (
+  uuid: string
+): Promise<ApiResponse<QuizAdmin>> => {
   if (process.env.REACT_APP_USEMOCK) {
     const mockResp = await new Promise<ApiResponse<QuizAdmin>>((resolve) => {
       setTimeout(() => {

@@ -1,33 +1,24 @@
-export interface QuizCreate {
-  id: string;
-  title: string;
-  numUsers: number;
-}
-
-export interface QuizCreated {
-  id: string;
-  sharingUrl: string;
-  ownerUrl: string;
-}
+type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
 
 /**
  *  QUIZ QUESTION
  */
-
 export interface QuizQuestion {
   type: string;
   id: string;
   title: string;
+  date?: Date;
 }
 
-export interface Options {
+export interface Option {
   id: string;
   text: string;
   selected?: boolean;
+  correct?: boolean;
 }
 
 export interface SelectorQuestion extends QuizQuestion {
-  options: Options[];
+  options: Option[];
 }
 
 export interface TextQuestion extends QuizQuestion {
@@ -36,12 +27,14 @@ export interface TextQuestion extends QuizQuestion {
 }
 
 export interface CheckQuestion extends QuizQuestion {
-  options: Options[];
+  options: Option[];
 }
 
 export interface Quiz {
   id: string;
-  questions: (SelectorQuestion | TextQuestion | CheckQuestion)[];
+  created: Date;
+  end: Date;
+  questions: QuestionType[];
 }
 
 /**
@@ -50,10 +43,31 @@ export interface Quiz {
 
 export interface UserRespose {
   userName: string;
-  questionResponses: (SelectorQuestion | TextQuestion | CheckQuestion)[];
+  date: Date;
+  questionResponses: QuestionType[];
 }
 
 export interface QuizAdmin {
+  id: string;
   quiz: Quiz;
+  created: Date;
+  end: Date;
   usersResponse: UserRespose[];
+}
+
+/**
+ * QUIS CREATE
+ */
+export interface QuizCreate {
+  title: string;
+  numUsers: number;
+  questions: QuestionType[];
+  created: Date;
+  end: Date;
+}
+
+export interface QuizCreated {
+  id: string;
+  sharingUrl: string;
+  ownerUrl: string;
 }

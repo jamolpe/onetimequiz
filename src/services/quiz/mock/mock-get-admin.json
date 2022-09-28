@@ -3,6 +3,8 @@
     "id": "111111-111111-111111-11111",
     "quiz": {
       "id": "111111-111111-111111-11111",
+      "end": "2022-10-28T18:47:52.136Z",
+      "created": "2022-09-28T18:47:52.136Z",
       "questions": [
         {
           "type": "check",
@@ -33,12 +35,14 @@
     },
     "usersResponse": [
       {
+        "date": "2022-10-28T18:47:52.136Z",
         "userName": "user one",
         "questionResponses": [
           {
             "type": "check",
             "id": "111111-111111-111111-11111",
             "title": "check question title question",
+            "date": "2022-10-28T18:47:52.136Z",
             "options": [
               {
                 "id": "111111-111111-111111-11111",
@@ -57,12 +61,14 @@
             "type": "text",
             "id": "111111-111111-111111-11112",
             "title": "text question title question",
+            "date": "2022-10-28T18:47:52.136Z",
             "response": "user response"
           },
           {
             "type": "selector",
             "id": "111111-111111-111111-11112",
             "title": "selector question with question?",
+            "date": "2022-10-28T18:47:52.136Z",
             "options": [
               { "id": "111111-111111-111111-11111", "text": "first option" },
               { "id": "111111-111111-111111-11112", "text": "second option" },
@@ -77,9 +83,11 @@
       },
       {
         "userName": "user two",
+        "date": "2022-10-28T18:47:52.136Z",
         "questionResponses": [
           {
             "type": "check",
+            "date": "2022-10-28T18:47:52.136Z",
             "id": "111111-111111-111111-11111",
             "title": "check question title question",
             "options": [
@@ -101,12 +109,14 @@
           },
           {
             "type": "text",
+            "date": "2022-10-28T18:47:52.136Z",
             "id": "111111-111111-111111-11112",
             "title": "text question title question",
             "response": "user response from user2"
           },
           {
             "type": "selector",
+            "date": "2022-10-28T18:47:52.136Z",
             "id": "111111-111111-111111-11112",
             "title": "selector question with question?",
             "options": [
