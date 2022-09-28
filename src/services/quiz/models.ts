@@ -7,7 +7,7 @@ export interface QuizQuestion {
   type: string;
   id: string;
   title: string;
-  date?: Date;
+  string?: string;
 }
 
 export interface Option {
@@ -32,8 +32,8 @@ export interface CheckQuestion extends QuizQuestion {
 
 export interface Quiz {
   id: string;
-  created: Date;
-  end: Date;
+  created: string;
+  end: string;
   questions: QuestionType[];
 }
 
@@ -43,15 +43,13 @@ export interface Quiz {
 
 export interface UserRespose {
   userName: string;
-  date: Date;
+  date: string;
   questionResponses: QuestionType[];
 }
 
 export interface QuizAdmin {
   id: string;
   quiz: Quiz;
-  created: Date;
-  end: Date;
   usersResponse: UserRespose[];
 }
 
@@ -62,8 +60,8 @@ export interface QuizCreate {
   title: string;
   numUsers: number;
   questions: QuestionType[];
-  created: Date;
-  end: Date;
+  created: string;
+  end: string;
 }
 
 export interface QuizCreated {

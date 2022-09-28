@@ -1,5 +1,9 @@
+import { useParams } from 'react-router-dom';
+
 const FillContainer = () => {
-  return <div>FillContainer</div>;
+  const { uuid } = useParams();
+
+  return <div>FillContainer {uuid}</div>;
 };
 
 export default FillContainer;

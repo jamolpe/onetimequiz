@@ -16,10 +16,6 @@ const mockGetAdmin = () => {
   return getQuestionAdmin;
 };
 
-const isAdminQuiz = () => {
-  return { body: true, code: 200 };
-};
-
 export const postCreateQuiz = async (
   userData: QuizCreate
 ): Promise<ApiResponse<QuizCreated>> => {
