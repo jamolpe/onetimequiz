@@ -1,0 +1,13 @@
+.quiz-selector {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  .selector {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    .selector-button {
+      max-height: 56px;
+    }
+  }
+}
