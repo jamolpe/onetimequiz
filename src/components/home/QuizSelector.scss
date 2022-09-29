@@ -1,7 +1,8 @@
 .quiz-selector {
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  width: 100%;
+  align-items: center;
   .selector {
     margin: 10px;
     display: flex;
