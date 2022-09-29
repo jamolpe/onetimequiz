@@ -1,15 +1,20 @@
 import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TextInput from '../common/TextInput';
 
 import './QuizSelector.scss';
 const QuizSelector = () => {
   const navigate = useNavigate();
+  const [uuidEnabled, setUuidEnabled] = useState(false);
+  const [uuidAdminEnabled, setUuidAdminEnabled] = useState(false);
 
   return (
     <div className="quiz-selector">
       <Formsy
+        onValid={() => setUuidEnabled(true)}
+        onInvalid={() => setUuidEnabled(false)}
         onSubmit={(model) => {
           navigate(`/quiz/${model.uuid}`);
         }}
@@ -26,6 +31,7 @@ const QuizSelector = () => {
             label="Uuid:"
           />
           <Button
+            disabled={!uuidEnabled}
             className="selector-button"
             variant="contained"
             color="secondary"
@@ -36,6 +42,8 @@ const QuizSelector = () => {
         </div>
       </Formsy>
       <Formsy
+        onValid={() => setUuidAdminEnabled(true)}
+        onInvalid={() => setUuidAdminEnabled(false)}
         onSubmit={(model) => {
           navigate(`/quiz/admin/${model.adminUuid}`);
         }}
@@ -52,6 +60,7 @@ const QuizSelector = () => {
             label="Administrate Uuid:"
           />
           <Button
+            disabled={!uuidAdminEnabled}
             className="selector-button"
             variant="contained"
             color="secondary"
