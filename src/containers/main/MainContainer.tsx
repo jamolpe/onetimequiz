@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import HomeContainer from '../home/HomeContainer';
+import CreateContainer from '../quiz/create/CreateContainer';
 import QuizContainer from '../quiz/QuizContainer';
 import WraperContainer from '../wrapper/WrapperContainer';
 
@@ -8,7 +10,14 @@ const MainContainer = () => {
     <>
       <div className="body-content body-container">
         <Routes>
-          <Route path="/" element={<div> main component</div>} />
+          <Route
+            path="/"
+            element={<WraperContainer component={<HomeContainer />} />}
+          />
+          <Route
+            path="/quiz/create"
+            element={<WraperContainer component={<CreateContainer />} />}
+          />
           <Route
             path="/quiz/:uuid"
             element={
