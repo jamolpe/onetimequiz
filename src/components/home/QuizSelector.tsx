@@ -11,7 +11,7 @@ const QuizSelector = () => {
   const [uuidAdminEnabled, setUuidAdminEnabled] = useState(false);
 
   return (
-    <div className="quiz-selector">
+    <div className="quiz-selector-form">
       <Formsy
         onValid={() => setUuidEnabled(true)}
         onInvalid={() => setUuidEnabled(false)}

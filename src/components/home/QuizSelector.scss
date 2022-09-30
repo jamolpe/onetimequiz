@@ -1,8 +1,10 @@
-.quiz-selector {
+.quiz-selector-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  align-items: center;
+  height: 100%;
+  justify-content: center;
+  margin-left: 20px;
+  margin-right: 20px;
   .selector {
     margin: 10px;
     display: flex;
