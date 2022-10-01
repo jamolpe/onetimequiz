@@ -5,6 +5,56 @@ import { useNavigate } from 'react-router-dom';
 import TextInput from '../common/TextInput';
 
 import './QuizSelector.scss';
+
+type SelectorProps = {
+  label: string;
+  urlBase: string;
+  enable: boolean;
+  buttonText: string;
+  setUuidEnabled: (enable: boolean) => void;
+  navigate: (uuid: string) => void;
+};
+const Selector = ({
+  label,
+  setUuidEnabled,
+  enable,
+  navigate,
+  urlBase,
+  buttonText
+}: SelectorProps) => {
+  return (
+    <Formsy
+      onValid={() => setUuidEnabled(true)}
+      onInvalid={() => setUuidEnabled(false)}
+      onSubmit={(model) => {
+        navigate(`${urlBase}${model.uuid}`);
+      }}
+    >
+      <div className="selector">
+        <TextInput
+          name="uuid"
+          validations={{
+            matchRegexp:
+              /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+          }}
+          validationError="This is not a valid code"
+          required
+          label={label}
+        />
+        <Button
+          disabled={!enable}
+          className="selector-button"
+          variant="contained"
+          color="secondary"
+          type="submit"
+        >
+          {buttonText}
+        </Button>
+      </div>
+    </Formsy>
+  );
+};
+
 const QuizSelector = () => {
   const navigate = useNavigate();
   const [uuidEnabled, setUuidEnabled] = useState(false);
@@ -12,64 +62,32 @@ const QuizSelector = () => {
 
   return (
     <div className="quiz-selector-form">
-      <Formsy
-        onValid={() => setUuidEnabled(true)}
-        onInvalid={() => setUuidEnabled(false)}
-        onSubmit={(model) => {
-          navigate(`/quiz/${model.uuid}`);
+      <Selector
+        label="Uuid"
+        urlBase={'/quiz/'}
+        enable={uuidEnabled}
+        buttonText={'Fill Quiz'}
+        setUuidEnabled={setUuidEnabled}
+        navigate={navigate}
+      />
+      <Selector
+        label="Admin uuid"
+        urlBase={'/quiz/admin/'}
+        enable={uuidAdminEnabled}
+        buttonText={'Admin Quiz'}
+        setUuidEnabled={setUuidAdminEnabled}
+        navigate={navigate}
+      />
+      <Button
+        onClick={() => {
+          navigate('/quiz/create');
         }}
+        className="selector-button"
+        variant="contained"
+        color="secondary"
       >
-        <div className="selector">
-          <TextInput
-            name="uuid"
-            validations={{
-              matchRegexp:
-                /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
-            }}
-            validationError="This is not a valid code"
-            required
-            label="Uuid:"
-          />
-          <Button
-            disabled={!uuidEnabled}
-            className="selector-button"
-            variant="contained"
-            color="secondary"
-            type="submit"
-          >
-            Fill Quiz
-          </Button>
-        </div>
-      </Formsy>
-      <Formsy
-        onValid={() => setUuidAdminEnabled(true)}
-        onInvalid={() => setUuidAdminEnabled(false)}
-        onSubmit={(model) => {
-          navigate(`/quiz/admin/${model.adminUuid}`);
-        }}
-      >
-        <div className="selector">
-          <TextInput
-            name="adminUuid"
-            validations={{
-              matchRegexp:
-                /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
-            }}
-            validationError="This is not a valid code"
-            required
-            label="Administrate Uuid:"
-          />
-          <Button
-            disabled={!uuidAdminEnabled}
-            className="selector-button"
-            variant="contained"
-            color="secondary"
-            type="submit"
-          >
-            Admin Quiz
-          </Button>
-        </div>
-      </Formsy>
+        Create quiz
+      </Button>
     </div>
   );
 };
