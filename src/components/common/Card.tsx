@@ -6,8 +6,20 @@ type CardProps = {
   width?: string | number;
   minWidth?: string | number;
   minHeight?: string | number;
+  maxWidth?: string | number;
+  maxHeight?: string | number;
+  margin?: string | number;
 };
-const Card = ({ component, height, width, minWidth, minHeight }: CardProps) => {
+const Card = ({
+  component,
+  height,
+  width,
+  minWidth,
+  minHeight,
+  maxWidth,
+  maxHeight,
+  margin
+}: CardProps) => {
   return (
     <div
       className="card"
@@ -15,7 +27,10 @@ const Card = ({ component, height, width, minWidth, minHeight }: CardProps) => {
         height: height,
         width: width,
         minHeight: minHeight,
-        minWidth: minWidth
+        minWidth: minWidth,
+        maxWidth: maxWidth,
+        maxHeight: maxHeight,
+        margin: margin
       }}
     >
       {component}
