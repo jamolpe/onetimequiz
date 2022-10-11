@@ -1,5 +1,11 @@
 export type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
 
+export const questionTypes: Record<string, string> = {
+  SELECTOR: 'Selector',
+  TEXT: 'text',
+  CHECK: 'check'
+};
+
 /**
  *  QUIZ QUESTION
  */
