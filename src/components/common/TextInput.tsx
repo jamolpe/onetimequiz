@@ -19,7 +19,6 @@ const TextInput = ({
   value,
   setValue,
   showError,
-  isValid,
   label,
   placeholder,
   isRequired,
