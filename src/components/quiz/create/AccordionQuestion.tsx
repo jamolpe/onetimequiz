@@ -40,6 +40,8 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 type AccordionQuestionProps = {
   panelName: string;
   expanded: string | false;
+  component: JSX.Element;
+  title: string;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
@@ -48,6 +50,8 @@ type AccordionQuestionProps = {
 const AccordionQuestion = ({
   panelName,
   expanded,
+  component,
+  title,
   handleChange
 }: AccordionQuestionProps) => {
   return (
@@ -57,16 +61,9 @@ const AccordionQuestion = ({
         onChange={handleChange(panelName)}
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>Collapsible Group Item #1</Typography>
+          <Typography>{title}</Typography>
         </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
-        </AccordionDetails>
+        <AccordionDetails>{component}</AccordionDetails>
       </Accordion>
     </div>
   );
