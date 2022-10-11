@@ -11,6 +11,7 @@ type TextInputProps = {
   label: string;
   isRequired: boolean;
   showRequired: boolean;
+  placeholder?: string;
 };
 
 const TextInput = ({
@@ -20,6 +21,7 @@ const TextInput = ({
   showError,
   isValid,
   label,
+  placeholder,
   isRequired,
   showRequired
 }: TextInputProps) => {
@@ -31,7 +33,7 @@ const TextInput = ({
       <TextField
         className="text-input"
         error={showError}
-        label="quiz to fill"
+        label={placeholder ?? label}
         variant="outlined"
         value={value || ''}
         onChange={(e) => setValue(e.currentTarget.value)}
