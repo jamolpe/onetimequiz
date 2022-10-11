@@ -30,7 +30,7 @@ const DropDown = ({
       <span>
         {label} {isRequired ? '*' : null}
       </span>
-      <FormControl fullWidth>
+      <FormControl variant="standard" fullWidth>
         <InputLabel id={id + '-label'}>{placeholder}</InputLabel>
         <Select
           id={id}
