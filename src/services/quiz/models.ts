@@ -1,11 +1,11 @@
-type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
+export type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
 
 /**
  *  QUIZ QUESTION
  */
 export interface QuizQuestion {
   type: string;
-  id: string;
+  id?: string;
   title: string;
   string?: string;
 }
