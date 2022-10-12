@@ -6,10 +6,13 @@ import DropDown from '../../../common/DropDown';
 import TextInput from '../../../common/TextInput';
 import { TypeQuestionCreate } from './TypeQuestionCreate';
 import './CreateQuestion.scss';
+
 type CreateQuestion = {
   handleClose: () => void;
   createQuestion: (model: QuestionType) => void;
 };
+
+const QUESTIONS_WITH_TYPES = ['SELECTOR', 'CHECK'];
 
 const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
   const [createQuestionEnabled, setCreateQuestionEnabled] = useState(false);
@@ -21,6 +24,7 @@ const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
   };
   return (
     <Formsy
+      className="question-create"
       onValid={() => setCreateQuestionEnabled(true)}
       onInvalid={() => setCreateQuestionEnabled(false)}
       onSubmit={createQuestionClick}
@@ -48,17 +52,19 @@ const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
             onSelect={(value: string | number) =>
               setSelectedType(value.toString())
             }
+            value={selectedType}
             items={Object.keys(questionTypes).map((k) => ({
               value: k,
               label: questionTypes[k]
             }))}
           />
         </div>
-        <div className="type-create">
-          {selectedType && <TypeQuestionCreate typeQuestion={selectedType} />}
-        </div>
+        {QUESTIONS_WITH_TYPES.includes(selectedType) && (
+          <div className="type-create">
+            {selectedType && <TypeQuestionCreate typeQuestion={selectedType} />}
+          </div>
+        )}
       </div>
-
       {!createQuestionEnabled && (
         <p className="error">Required fields must be filled</p>
       )}
