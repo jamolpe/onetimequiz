@@ -1,8 +1,8 @@
 import { Box, Button, Modal } from '@mui/material';
 import { useState } from 'react';
 import { QuestionType } from '../../../services/quiz/models';
-import AccordionQuestion from './AccordionQuestion';
-import CreateQuestion from './CreateQuestion';
+import AccordionQuestion from './question/AccordionQuestion';
+import CreateQuestion from './question/CreateQuestion';
 import './CreateQuiz.scss';
 
 const style = {
@@ -59,6 +59,7 @@ const CreateQuiz = () => {
         {questions.map((q, i) => {
           return (
             <AccordionQuestion
+              key={i}
               panelName={`panel${i}`}
               handleChange={handleChange}
               title={q}
