@@ -5,7 +5,7 @@ import './TextInput.scss';
 type TextInputProps = {
   value?: string;
   errorMessage: string;
-  onChangeValue: (value: string) => string;
+  onChangeValue?: (value: string) => string;
   showError: boolean;
   isValid: boolean;
   label: string;
@@ -35,7 +35,7 @@ const TextInput = ({
         label={placeholder ?? label}
         variant="outlined"
         value={value || ''}
-        onChange={(e) => onChangeValue(e.currentTarget.value)}
+        onChange={(e) => onChangeValue && onChangeValue(e.currentTarget.value)}
       />
       <p className={showError ? 'error' : 'hidde'}>{errorMessage}</p>
     </div>

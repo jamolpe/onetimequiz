@@ -10,7 +10,7 @@ type DropDownType = {
   placeholder: string | number;
   showError: boolean;
   errorMessage: string;
-  onSelect: (value: string | number) => void;
+  onSelect?: (value: string | number) => void;
 };
 
 const DropDown = ({
@@ -36,7 +36,7 @@ const DropDown = ({
           labelId={id + '-label'}
           value={value ?? ''}
           label={label}
-          onChange={(e) => onSelect(e.target.value)}
+          onChange={(e) => onSelect && onSelect(e.target.value)}
         >
           {items.map((item) => {
             return (
