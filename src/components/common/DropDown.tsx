@@ -1,6 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { withFormsy } from 'formsy-react';
-import React from 'react';
 
 type DropDownType = {
   id: string;
@@ -11,7 +10,7 @@ type DropDownType = {
   placeholder: string | number;
   showError: boolean;
   errorMessage: string;
-  setValue: (value: string | number) => string | number;
+  onSelect: (value: string | number) => void;
 };
 
 const DropDown = ({
@@ -23,7 +22,7 @@ const DropDown = ({
   placeholder,
   showError,
   errorMessage,
-  setValue
+  onSelect
 }: DropDownType) => {
   return (
     <div className="drop-down">
@@ -37,7 +36,7 @@ const DropDown = ({
           labelId={id + '-label'}
           value={value ?? ''}
           label={label}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => onSelect(e.target.value)}
         >
           {items.map((item) => {
             return (
