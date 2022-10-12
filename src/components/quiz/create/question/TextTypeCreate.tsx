@@ -1,7 +1,12 @@
 import React from 'react';
+import TextInput from '../../../common/TextInput';
 
 const TextTypeCreate = () => {
-  return <div>TextTypeCreate</div>;
+  return (
+    <>
+      <TextInput name={'Max length'} label={'Max length'} />
+    </>
+  );
 };
 
 export default TextTypeCreate;

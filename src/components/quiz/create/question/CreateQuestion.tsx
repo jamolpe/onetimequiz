@@ -12,8 +12,6 @@ type CreateQuestion = {
   createQuestion: (model: QuestionType) => void;
 };
 
-const QUESTIONS_WITH_TYPES = ['SELECTOR', 'CHECK'];
-
 const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
   const [createQuestionEnabled, setCreateQuestionEnabled] = useState(false);
   const [selectedType, setSelectedType] = useState<string>('');
@@ -59,11 +57,9 @@ const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
             }))}
           />
         </div>
-        {QUESTIONS_WITH_TYPES.includes(selectedType) && (
-          <div className="type-create">
-            {selectedType && <TypeQuestionCreate typeQuestion={selectedType} />}
-          </div>
-        )}
+        <div className="type-create">
+          {selectedType && <TypeQuestionCreate typeQuestion={selectedType} />}
+        </div>
       </div>
       {!createQuestionEnabled && (
         <p className="error">Required fields must be filled</p>

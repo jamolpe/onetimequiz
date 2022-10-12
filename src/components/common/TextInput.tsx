@@ -30,7 +30,7 @@ const TextInput = ({
         {label} {isRequired ? '*' : null}
       </span>
       <TextField
-        className="text-input"
+        className="text-field"
         error={showError}
         label={placeholder ?? label}
         variant="outlined"
