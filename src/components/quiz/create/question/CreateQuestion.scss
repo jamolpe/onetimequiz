@@ -1,8 +1,12 @@
-.question-title {
-}
-.question-type {
-  .type-selector {
-  }
-  .type-create {
+.question-create {
+  .question-type {
+    margin-top: 15px;
+    .type-create {
+      min-height: 200px;
+      margin-top: 15px;
+      background-color: #8080802b;
+      border-radius: 10px;
+      display: flex;
+    }
   }
 }
