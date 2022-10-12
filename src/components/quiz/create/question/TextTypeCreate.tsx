@@ -1,10 +1,28 @@
-import React from 'react';
+import { useState } from 'react';
 import TextInput from '../../../common/TextInput';
 
-const TextTypeCreate = () => {
+export type TextQuestionDetail = {
+  maxCaracters: string;
+};
+
+type TextTypeCreateType = {
+  setQuestionType: (value: TextQuestionDetail) => void;
+};
+
+const TextTypeCreate = ({ setQuestionType }: TextTypeCreateType) => {
+  const [maxCaracters, setMaxCaracters] = useState<string>('');
+
   return (
     <>
-      <TextInput name={'Max length'} label={'Max length'} />
+      <TextInput
+        name="maxCaracters"
+        label={'Max length'}
+        value={maxCaracters}
+        onChangeValue={(value) => {
+          setMaxCaracters(value);
+          setQuestionType({ maxCaracters: value });
+        }}
+      />
     </>
   );
 };
