@@ -1,3 +1,4 @@
+@import '../../index.scss';
 .error {
   color: #d32f2f;
 }
@@ -13,11 +14,11 @@
 
 .text-field {
   & label.Mui-focused {
-    color: yellow;
+    color: $selected-colour;
   }
   & .MuiOutlinedInput-root {
     &.Mui-focused fieldset {
-      border-color: yellow;
+      border-color: $selected-colour;
     }
   }
 }

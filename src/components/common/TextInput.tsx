@@ -5,7 +5,7 @@ import './TextInput.scss';
 type TextInputProps = {
   value?: string;
   errorMessage: string;
-  onChangeValue?: (value: string) => string;
+  onChangeValue?: (value: string) => void;
   showError: boolean;
   isValid: boolean;
   label: string;

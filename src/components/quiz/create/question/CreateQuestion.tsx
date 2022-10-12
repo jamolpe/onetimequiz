@@ -1,11 +1,16 @@
 import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
 import { useState } from 'react';
-import { QuestionType, questionTypes } from '../../../../services/quiz/models';
+import {
+  QuestionType,
+  questionTypes,
+  QuizQuestion
+} from '../../../../services/quiz/models';
 import DropDown from '../../../common/DropDown';
 import TextInput from '../../../common/TextInput';
 import { TypeQuestionCreate } from './TypeQuestionCreate';
 import './CreateQuestion.scss';
+import { TextQuestionDetail } from './TextTypeCreate';
 
 type CreateQuestion = {
   handleClose: () => void;
@@ -15,9 +20,12 @@ type CreateQuestion = {
 const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
   const [createQuestionEnabled, setCreateQuestionEnabled] = useState(false);
   const [selectedType, setSelectedType] = useState<string>('');
+  const [questionType, setQuestionType] = useState<TextQuestionDetail | null>(
+    null
+  );
 
-  const createQuestionClick = (model: QuestionType) => {
-    createQuestion(model);
+  const createQuestionClick = (model: QuizQuestion) => {
+    createQuestion({ ...model, ...questionType });
     handleClose();
   };
   return (
@@ -58,7 +66,12 @@ const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
           />
         </div>
         <div className="type-create">
-          {selectedType && <TypeQuestionCreate typeQuestion={selectedType} />}
+          {selectedType && (
+            <TypeQuestionCreate
+              typeQuestion={selectedType}
+              setQuestionType={setQuestionType}
+            />
+          )}
         </div>
       </div>
       {!createQuestionEnabled && (

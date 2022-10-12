@@ -28,7 +28,7 @@ export interface SelectorQuestion extends QuizQuestion {
 }
 
 export interface TextQuestion extends QuizQuestion {
-  maxCaracters?: number;
+  maxCaracters?: number | string;
   response?: string;
 }
 
