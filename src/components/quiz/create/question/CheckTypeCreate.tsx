@@ -1,7 +1,8 @@
+import { withFormsy } from 'formsy-react';
 import React from 'react';
 
 const CheckTypeCreate = () => {
   return <div>CheckTypeCreate</div>;
 };
 
-export default CheckTypeCreate;
+export default withFormsy(CheckTypeCreate);
