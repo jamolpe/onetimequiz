@@ -20,6 +20,8 @@ type CreateQuestion = {
 const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
   const [createQuestionEnabled, setCreateQuestionEnabled] = useState(false);
   const [selectedType, setSelectedType] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
+
   const [questionType, setQuestionType] = useState<TextQuestionDetail | null>(
     null
   );
@@ -38,6 +40,8 @@ const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
       <div className="question-title">
         <TextInput
           required
+          value={title}
+          onChangeValue={(value) => setTitle(value)}
           validations={{ minLength: 5 }}
           validationErrors={{
             minLength: 'size should be more than 5 caracters'
