@@ -1,8 +1,8 @@
-import { Slider } from '@mui/material';
+import { Slider as MaterialSlider } from '@mui/material';
 import { withFormsy } from 'formsy-react';
 import React from 'react';
 
-type SliderCompProps = {
+type SliderProps = {
   size?: 'small' | 'medium';
   defaultValue: number;
   min: number;
@@ -18,7 +18,7 @@ type SliderCompProps = {
   onChangeValue: (value: number) => void;
 };
 
-const SliderComp = ({
+const Slider = ({
   size,
   defaultValue,
   min,
@@ -32,13 +32,13 @@ const SliderComp = ({
   value,
   step,
   onChangeValue
-}: SliderCompProps) => {
+}: SliderProps) => {
   return (
     <div>
       <span>
         {label} {isRequired ? '*' : null}
       </span>
-      <Slider
+      <MaterialSlider
         size={size}
         defaultValue={defaultValue}
         min={min}
@@ -56,4 +56,4 @@ const SliderComp = ({
   );
 };
 
-export default withFormsy(SliderComp);
+export default withFormsy(Slider);
