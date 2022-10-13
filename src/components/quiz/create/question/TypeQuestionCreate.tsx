@@ -1,4 +1,3 @@
-import { QuestionType } from '../../../../services/quiz/models';
 import CheckTypeCreate from './CheckTypeCreate';
 import SelectorTypeCreate from './SelectorTypeCreate';
 import TextTypeCreate, { TextQuestionDetail } from './TextTypeCreate';
@@ -11,13 +10,13 @@ type TypeQuestionCreateType = {
 
 const QUESTION_TYPES_COMPONENTS: Record<string, (props: any) => JSX.Element> = {
   SELECTOR: (props) => {
-    return <SelectorTypeCreate {...props} />;
+    return <SelectorTypeCreate {...props} name="detail" />;
   },
   TEXT: (props) => {
-    return <TextTypeCreate {...props} />;
+    return <TextTypeCreate {...props} name="detail" />;
   },
   CHECK: (props) => {
-    return <CheckTypeCreate {...props} />;
+    return <CheckTypeCreate {...props} name="detail" />;
   }
 };
 export const TypeQuestionCreate = ({
