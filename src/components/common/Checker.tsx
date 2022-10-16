@@ -1,6 +1,8 @@
 import { Checkbox, FormControl, FormControlLabel } from '@mui/material';
 import { withFormsy } from 'formsy-react';
 
+import './Checker.scss';
+
 type CheckerType = {
   label?: string;
   items: {

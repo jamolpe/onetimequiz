@@ -46,9 +46,10 @@ const Selector = ({
           value={value}
           onChange={(e) => onSelect(e.target.value)}
         >
-          {items.map((item) => {
+          {items.map((item, i) => {
             return (
               <FormControlLabel
+                key={i}
                 value={item.value}
                 control={item.control}
                 label={item.label}

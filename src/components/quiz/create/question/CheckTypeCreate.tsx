@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Checker from '../../../common/Checker';
 import TextInput from '../../../common/TextInput';
 
+import './CheckTypeCreate.scss';
 const CheckTypeCreate = () => {
   const [options, setOptions] = useState<
     {
@@ -42,10 +43,11 @@ const CheckTypeCreate = () => {
   return (
     <div className="type-checker">
       <Checker
+        required
         name={'question-checker'}
         items={options}
         onChange={onChangeOption}
-        label="New checker selector"
+        label="New checker option"
         value={options.map((op) => ({
           id: op.id,
           label: op.label,
