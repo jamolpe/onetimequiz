@@ -1,5 +1,4 @@
 import { Button, Radio } from '@mui/material';
-import { withFormsy } from 'formsy-react';
 import { useState } from 'react';
 import Selector from '../../../common/Selector';
 import TextInput from '../../../common/TextInput';
@@ -33,7 +32,7 @@ const SelectorTypeCreate = () => {
       <div className="new-option">
         <TextInput
           label="New Option"
-          name={'newOption'}
+          name="newSelectorOpt"
           value={newOption}
           onChangeValue={(value) => setNewOption(value)}
         />
@@ -43,4 +42,4 @@ const SelectorTypeCreate = () => {
   );
 };
 
-export default withFormsy(SelectorTypeCreate);
+export default SelectorTypeCreate;
