@@ -25,7 +25,7 @@ const SelectorTypeCreate = () => {
           control: <Radio />,
           label: op
         }))}
-        label="New option selector"
+        label="New selector option"
         value={selectedOption}
         onSelect={(val) => setSelectedOption(val.toString())}
       />
