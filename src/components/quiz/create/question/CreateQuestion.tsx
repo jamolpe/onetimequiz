@@ -12,16 +12,18 @@ import { TypeQuestionCreate } from './TypeQuestionCreate';
 import './CreateQuestion.scss';
 import { TextQuestionDetail } from './TextTypeCreate';
 
-type CreateQuestion = {
+type CreateQuestionProps = {
   handleClose: () => void;
   createQuestion: (model: QuestionType) => void;
 };
 
-const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
+const CreateQuestion = ({
+  handleClose,
+  createQuestion
+}: CreateQuestionProps) => {
   const [createQuestionEnabled, setCreateQuestionEnabled] = useState(false);
   const [selectedType, setSelectedType] = useState<string>('');
   const [title, setTitle] = useState<string>('');
-
   const [questionType, setQuestionType] = useState<TextQuestionDetail | null>(
     null
   );
@@ -52,7 +54,7 @@ const CreateQuestion = ({ handleClose, createQuestion }: CreateQuestion) => {
         />
       </div>
       <div className="question-type">
-        <div className="type-selector">
+        <div className="type-dropdown">
           <DropDown
             required
             id="question-type"
