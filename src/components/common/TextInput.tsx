@@ -3,7 +3,7 @@ import { withFormsy } from 'formsy-react';
 import './TextInput.scss';
 
 type TextInputProps = {
-  value?: string;
+  value?: string | number;
   errorMessage: string;
   onChangeValue?: (value: string) => void;
   showError: boolean;
