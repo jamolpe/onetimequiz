@@ -2,6 +2,7 @@ import { Checkbox, FormControl, FormControlLabel } from '@mui/material';
 import { withFormsy } from 'formsy-react';
 
 import './Checker.scss';
+import TextInput from './TextInput';
 
 type CheckerType = {
   label?: string;
@@ -21,6 +22,7 @@ type CheckerType = {
   errorMessage: string;
   name?: string;
   showRequired: boolean;
+  required: boolean;
   onChange: (value: string | number) => void;
 };
 
@@ -32,8 +34,14 @@ const Checker = ({
   name,
   items,
   showRequired,
+  required,
   onChange
 }: CheckerType) => {
+  const checked = items.filter((item) => item.checked);
+  if (isRequired && checked.length === 0) {
+    showError = true;
+    errorMessage = 'At least one item shoud be selected';
+  }
   return (
     <div className={(showRequired ? 'required' : '') + ' checker'}>
       {label && (
@@ -42,6 +50,15 @@ const Checker = ({
         </span>
       )}
       <FormControl>
+        <div className="input-checker">
+          <TextInput
+            required={required}
+            label={''}
+            name={name + '-input'}
+            value={showError ? '' : JSON.stringify(checked.length)}
+          />
+        </div>
+
         {items.map((item) => {
           return (
             <FormControlLabel

@@ -1,4 +1,7 @@
 .checker {
   display: flex;
   flex-direction: column;
+  .input-checker {
+    display: none;
+  }
 }
