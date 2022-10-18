@@ -1,31 +1,29 @@
 import CheckTypeCreate from './CheckTypeCreate';
 import SelectorTypeCreate from './SelectorTypeCreate';
-import TextTypeCreate, { TextQuestionDetail } from './TextTypeCreate';
+import TextTypeCreate from './TextTypeCreate';
 import './TypeQuestionCreate.scss';
 
 type TypeQuestionCreateType = {
   typeQuestion: string;
-  setQuestionType: (value: TextQuestionDetail) => void;
 };
 
-const QUESTION_TYPES_COMPONENTS: Record<string, (props: any) => JSX.Element> = {
-  SELECTOR: (props) => {
-    return <SelectorTypeCreate {...props} name="detail" />;
+const QUESTION_TYPES_COMPONENTS: Record<string, () => JSX.Element> = {
+  SELECTOR: () => {
+    return <SelectorTypeCreate />;
   },
-  TEXT: (props) => {
-    return <TextTypeCreate {...props} name="detail" />;
+  TEXT: () => {
+    return <TextTypeCreate />;
   },
-  CHECK: (props) => {
-    return <CheckTypeCreate {...props} name="detail" />;
+  CHECK: () => {
+    return <CheckTypeCreate />;
   }
 };
 export const TypeQuestionCreate = ({
-  typeQuestion,
-  setQuestionType
+  typeQuestion
 }: TypeQuestionCreateType) => {
   return (
     <div className="type-create-container">
-      {QUESTION_TYPES_COMPONENTS[typeQuestion](setQuestionType)}
+      {QUESTION_TYPES_COMPONENTS[typeQuestion]()}
     </div>
   );
 };

@@ -44,7 +44,7 @@ const CheckTypeCreate = () => {
     <div className="type-checker">
       <Checker
         required
-        name={'question-checker'}
+        name={'questionChecker'}
         items={options}
         onChange={onChangeOption}
         label="New checker option"

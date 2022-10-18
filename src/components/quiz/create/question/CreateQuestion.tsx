@@ -2,19 +2,31 @@ import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
 import { useState } from 'react';
 import {
+  CheckQuestion,
+  Option,
   QuestionType,
   questionTypes,
-  QuizQuestion
+  SelectorQuestion,
+  TextQuestion
 } from '../../../../services/quiz/models';
 import DropDown from '../../../common/DropDown';
 import TextInput from '../../../common/TextInput';
 import { TypeQuestionCreate } from './TypeQuestionCreate';
 import './CreateQuestion.scss';
-import { TextQuestionDetail } from './TextTypeCreate';
 
 type CreateQuestionProps = {
   handleClose: () => void;
-  createQuestion: (model: QuestionType) => void;
+  createQuestion: (model: QuestionType | null) => void;
+};
+
+type QuestionDataType = {
+  questionChecker: { id: number; label: string; checked: boolean }[];
+  questionCheckerInput: string;
+  questionTextMax: number;
+  questionSelector: string;
+  questionSelectorInput: string;
+  type: string;
+  title: string;
 };
 
 const CreateQuestion = ({
@@ -24,12 +36,73 @@ const CreateQuestion = ({
   const [createQuestionEnabled, setCreateQuestionEnabled] = useState(false);
   const [selectedType, setSelectedType] = useState<string>('');
   const [title, setTitle] = useState<string>('');
-  const [questionType, setQuestionType] = useState<TextQuestionDetail | null>(
-    null
-  );
 
-  const createQuestionClick = (model: QuizQuestion) => {
-    createQuestion({ ...model, ...questionType });
+  const transformCheckerOptions = (
+    questionChecker: {
+      id: number;
+      label: string;
+      checked: boolean;
+    }[],
+    questionCheckerInput: string
+  ): Option[] => {
+    const options: {
+      id: number;
+      label: string;
+      checked: boolean;
+    }[] = JSON.parse(questionCheckerInput);
+    return questionChecker.map((check) => ({
+      id: check.id,
+      text: check.label,
+      checked: options.filter((opt) => check.id === opt.id).length > 0
+    }));
+  };
+  const transformSelectorOptions = (
+    questionSelectorInput: string,
+    questionSelector: string
+  ): Option[] => {
+    const options: string[] = JSON.parse(questionSelectorInput);
+    return options.map((opt, i) => ({
+      id: i,
+      text: opt,
+      correct: questionSelector === opt
+    }));
+  };
+  const createQuestionFromForm = (
+    model: QuestionDataType
+  ): QuestionType | null => {
+    console.log(model);
+    switch (model.type) {
+      case 'SELECTOR':
+        return {
+          type: model.type,
+          title: model.title,
+          options: transformSelectorOptions(
+            model.questionSelectorInput,
+            model.questionSelector
+          )
+        };
+      case 'TEXT':
+        return {
+          type: model.type,
+          title: model.title,
+          maxCaracters: model.questionTextMax
+        };
+      case 'CHECK':
+        return {
+          type: model.type,
+          title: model.title,
+          options: transformCheckerOptions(
+            model.questionChecker,
+            model.questionCheckerInput
+          )
+        };
+      default:
+        return null;
+    }
+  };
+  const createQuestionClick = (model: QuestionDataType) => {
+    const question = createQuestionFromForm(model);
+    createQuestion(question);
     handleClose();
   };
   return (
@@ -72,12 +145,7 @@ const CreateQuestion = ({
           />
         </div>
         <div className="type-create">
-          {selectedType && (
-            <TypeQuestionCreate
-              typeQuestion={selectedType}
-              setQuestionType={setQuestionType}
-            />
-          )}
+          {selectedType && <TypeQuestionCreate typeQuestion={selectedType} />}
         </div>
       </div>
       {!createQuestionEnabled && (
