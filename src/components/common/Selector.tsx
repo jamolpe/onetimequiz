@@ -2,6 +2,7 @@ import { FormControl, FormControlLabel, RadioGroup } from '@mui/material';
 import { withFormsy } from 'formsy-react';
 
 import './Selector.scss';
+import TextInput from './TextInput';
 
 type SelectorType = {
   id: string;
@@ -40,6 +41,15 @@ const Selector = ({
         </span>
       )}
       <FormControl>
+        <div className="input-selector">
+          <TextInput
+            label={''}
+            name={name + 'Input'}
+            value={
+              showError ? '' : JSON.stringify(items.map((item) => item.value))
+            }
+          />
+        </div>
         <RadioGroup
           aria-labelledby={id + '-radio'}
           name={name}

@@ -54,8 +54,8 @@ const Checker = ({
           <TextInput
             required={required}
             label={''}
-            name={name + '-input'}
-            value={showError ? '' : JSON.stringify(checked.length)}
+            name={name + 'Input'}
+            value={showError ? '' : JSON.stringify(checked)}
           />
         </div>
 
