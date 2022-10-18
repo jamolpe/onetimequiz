@@ -1,15 +1,8 @@
 import { useState } from 'react';
 import Slider from '../../../common/Slider';
 import './TextTypeCreate.scss';
-export type TextQuestionDetail = {
-  maxCaracters: string;
-};
 
-type TextTypeCreateType = {
-  name: string;
-};
-
-const TextTypeCreate = ({ name }: TextTypeCreateType) => {
+const TextTypeCreate = () => {
   const [maxCaracters, setMaxCaracters] = useState<number>(50);
   return (
     <div className="type-text-slider">
@@ -22,7 +15,7 @@ const TextTypeCreate = ({ name }: TextTypeCreateType) => {
         size="small"
         arialabel="non-linear-slider"
         onChangeValue={(val) => setMaxCaracters(val)}
-        name={name}
+        name="questionTextMax"
         defaultValue={0}
         label="Max length"
         validationError="Max length(numeric)"

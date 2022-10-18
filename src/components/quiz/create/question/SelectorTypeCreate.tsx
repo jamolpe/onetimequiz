@@ -18,8 +18,8 @@ const SelectorTypeCreate = () => {
     <div className="type-selector">
       <Selector
         required
-        name="question-selector"
-        id="question-selector"
+        name="questionSelector"
+        id="questionSelector"
         items={options.map((op) => ({
           value: op,
           control: <Radio />,

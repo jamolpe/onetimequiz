@@ -17,7 +17,7 @@ export interface QuizQuestion {
 }
 
 export interface Option {
-  id: string;
+  id: string | number;
   text: string;
   selected?: boolean;
   correct?: boolean;

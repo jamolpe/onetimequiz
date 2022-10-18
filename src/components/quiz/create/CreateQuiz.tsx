@@ -28,11 +28,13 @@ const CreateQuiz = () => {
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
-  const createNewQuestion = (model: QuestionType) => {
-    console.log(model);
-    const newQuestion = `question${model.title}`;
-    const newQuestions = [...questions, newQuestion];
-    setQuestions(newQuestions);
+  const createNewQuestion = (model: QuestionType | null) => {
+    if (model) {
+      console.log(model);
+      const newQuestion = `question${model.title}`;
+      const newQuestions = [...questions, newQuestion];
+      setQuestions(newQuestions);
+    }
   };
   return (
     <div className="create-container">
