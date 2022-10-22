@@ -5,7 +5,8 @@ $color-content: #f5f5f5;
 $hover-colour: DarkSeaGreen;
 $error-colour: rgb(226, 157, 157);
 $sucess-colour: #9aecbc;
-
+$grey-colour: #8080802b;
+$selected-colour: #ffbb00;
 $important-colour: #ec7063;
 //sizes
 
@@ -39,4 +40,8 @@ body {
 
 #pagebody .remove-button {
   background-color: $error-colour;
+}
+
+.error {
+  color: #d32f2f;
 }

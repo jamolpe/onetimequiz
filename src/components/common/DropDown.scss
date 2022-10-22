@@ -1,0 +1,11 @@
+@import '../../index.scss';
+.drop-down-input {
+  & label.Mui-focused {
+    color: $selected-colour;
+  }
+  & .MuiOutlinedInput-root {
+    &.Mui-focused fieldset {
+      border-color: $selected-colour;
+    }
+  }
+}

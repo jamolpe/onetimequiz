@@ -1,0 +1,16 @@
+.quiz-selector-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+  margin-left: 20px;
+  margin-right: 20px;
+  .selector {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    .selector-button {
+      max-height: 56px;
+    }
+  }
+}

@@ -1,17 +1,23 @@
-type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
+export type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
+
+export const questionTypes: Record<string, string> = {
+  SELECTOR: 'Selector',
+  TEXT: 'Text',
+  CHECK: 'Check'
+};
 
 /**
  *  QUIZ QUESTION
  */
 export interface QuizQuestion {
   type: string;
-  id: string;
+  id?: string;
   title: string;
   string?: string;
 }
 
 export interface Option {
-  id: string;
+  id: string | number;
   text: string;
   selected?: boolean;
   correct?: boolean;
@@ -22,7 +28,7 @@ export interface SelectorQuestion extends QuizQuestion {
 }
 
 export interface TextQuestion extends QuizQuestion {
-  maxCaracters?: number;
+  maxCaracters?: number | string;
   response?: string;
 }
 
