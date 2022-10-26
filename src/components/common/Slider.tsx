@@ -15,6 +15,7 @@ type SliderProps = {
   errorMessage: string;
   value: number;
   step?: number;
+  disabled?: boolean;
   onChangeValue: (value: number) => void;
 };
 
@@ -31,6 +32,7 @@ const Slider = ({
   errorMessage,
   value,
   step,
+  disabled = false,
   onChangeValue
 }: SliderProps) => {
   return (
@@ -39,6 +41,7 @@ const Slider = ({
         {label} {isRequired ? '*' : null}
       </span>
       <MaterialSlider
+        disabled={disabled}
         size={size}
         defaultValue={defaultValue}
         min={min}

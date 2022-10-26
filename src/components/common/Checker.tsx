@@ -23,6 +23,7 @@ type CheckerType = {
   name?: string;
   showRequired: boolean;
   required: boolean;
+  disabled?: boolean;
   onChange: (value: string | number) => void;
 };
 
@@ -35,6 +36,7 @@ const Checker = ({
   items,
   showRequired,
   required,
+  disabled = false,
   onChange
 }: CheckerType) => {
   const checked = items.filter((item) => item.checked);
@@ -49,7 +51,7 @@ const Checker = ({
           {label} {isRequired ? '*' : null}
         </span>
       )}
-      <FormControl>
+      <FormControl disabled={disabled}>
         <div className="input-checker">
           <TextInput
             required={required}

@@ -18,6 +18,7 @@ type SelectorType = {
   errorMessage: string;
   name?: string;
   showRequired: boolean;
+  disabled?: boolean;
   onSelect: (value: string | number) => void;
 };
 
@@ -31,6 +32,7 @@ const Selector = ({
   name,
   items,
   showRequired,
+  disabled = false,
   onSelect
 }: SelectorType) => {
   return (
@@ -40,7 +42,7 @@ const Selector = ({
           {label} {isRequired ? '*' : null}
         </span>
       )}
-      <FormControl>
+      <FormControl disabled={disabled}>
         <div className="input-selector">
           <TextInput
             label={''}
