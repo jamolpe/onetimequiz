@@ -2,12 +2,9 @@ import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
 import { useState } from 'react';
 import {
-  CheckQuestion,
   Option,
   QuestionType,
-  questionTypes,
-  SelectorQuestion,
-  TextQuestion
+  questionTypes
 } from '../../../../services/quiz/models';
 import DropDown from '../../../common/DropDown';
 import TextInput from '../../../common/TextInput';

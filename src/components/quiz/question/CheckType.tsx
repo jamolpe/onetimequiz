@@ -1,10 +1,21 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
-import Checker from '../../../common/Checker';
-import TextInput from '../../../common/TextInput';
+import Checker from '../../common/Checker';
+import TextInput from '../../common/TextInput';
 
-import './CheckTypeCreate.scss';
-const CheckTypeCreate = () => {
+import './CheckType.scss';
+
+type CheckTypeProps = {
+  prevOptions?: {
+    id: number;
+    value: string | number;
+    label: string | number;
+    checked: boolean;
+  }[];
+  viewMode?: boolean;
+};
+
+const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
   const [options, setOptions] = useState<
     {
       id: number;
@@ -12,7 +23,7 @@ const CheckTypeCreate = () => {
       label: string | number;
       checked: boolean;
     }[]
-  >([]);
+  >(prevOptions ?? []);
   const [newOption, setNewOption] = useState<string | number>('');
 
   const onChangeOption = (id: number | string) => {
@@ -54,17 +65,19 @@ const CheckTypeCreate = () => {
           checked: op.checked
         }))}
       />
-      <div className="new-option">
-        <TextInput
-          label="New Option"
-          name="newCheckerOpt"
-          value={newOption}
-          onChangeValue={(value) => setNewOption(value)}
-        />
-        <Button onClick={addNewOption}>Add</Button>
-      </div>
+      {!viewMode ?? (
+        <div className="new-option">
+          <TextInput
+            label="New Option"
+            name="newCheckerOpt"
+            value={newOption}
+            onChangeValue={(value) => setNewOption(value)}
+          />
+          <Button onClick={addNewOption}>Add</Button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default CheckTypeCreate;
+export default CheckType;

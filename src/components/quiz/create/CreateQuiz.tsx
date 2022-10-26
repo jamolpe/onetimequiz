@@ -19,7 +19,7 @@ const style = {
 };
 
 const CreateQuiz = () => {
-  const [questions, setQuestions] = useState<string[]>([]);
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [expanded, setExpanded] = useState<string | false>('');
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
@@ -30,9 +30,7 @@ const CreateQuiz = () => {
     };
   const createNewQuestion = (model: QuestionType | null) => {
     if (model) {
-      console.log(model);
-      const newQuestion = `question${model.title}`;
-      const newQuestions = [...questions, newQuestion];
+      const newQuestions = [...questions, model];
       setQuestions(newQuestions);
     }
   };
@@ -64,8 +62,8 @@ const CreateQuiz = () => {
               key={i}
               panelName={`panel${i}`}
               handleChange={handleChange}
-              title={q}
-              component={<div>{q}</div>}
+              question={q}
+              component={<div>{q.type}</div>}
               expanded={expanded}
             />
           );

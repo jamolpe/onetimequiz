@@ -1,6 +1,6 @@
-import CheckTypeCreate from './CheckTypeCreate';
-import SelectorTypeCreate from './SelectorTypeCreate';
-import TextTypeCreate from './TextTypeCreate';
+import CheckType from '../../question/CheckType';
+import SelectorType from '../../question/SelectorType';
+import TextType from '../../question/TextType';
 import './TypeQuestionCreate.scss';
 
 type TypeQuestionCreateType = {
@@ -9,13 +9,13 @@ type TypeQuestionCreateType = {
 
 const QUESTION_TYPES_COMPONENTS: Record<string, () => JSX.Element> = {
   SELECTOR: () => {
-    return <SelectorTypeCreate />;
+    return <SelectorType />;
   },
   TEXT: () => {
-    return <TextTypeCreate />;
+    return <TextType />;
   },
   CHECK: () => {
-    return <CheckTypeCreate />;
+    return <CheckType />;
   }
 };
 export const TypeQuestionCreate = ({

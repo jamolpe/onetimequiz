@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import Slider from '../../../common/Slider';
-import './TextTypeCreate.scss';
+import Slider from '../../common/Slider';
+import './TextType.scss';
 
-const TextTypeCreate = () => {
-  const [maxCaracters, setMaxCaracters] = useState<number>(50);
+type TextTypeProps = {
+  prevMaxCharacters?: number;
+  viewMode?: boolean;
+};
+
+const TextType = ({ prevMaxCharacters, viewMode = false }: TextTypeProps) => {
+  const [maxCaracters, setMaxCaracters] = useState<number>(
+    prevMaxCharacters ?? 50
+  );
   return (
     <div className="type-text-slider">
       <Slider
+        disabled={viewMode}
         required
         value={maxCaracters}
         min={0}
@@ -24,4 +32,4 @@ const TextTypeCreate = () => {
   );
 };
 
-export default TextTypeCreate;
+export default TextType;

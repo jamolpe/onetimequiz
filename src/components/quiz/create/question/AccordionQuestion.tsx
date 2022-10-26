@@ -5,6 +5,7 @@ import MuiAccordionSummary, {
   AccordionSummaryProps
 } from '@mui/material/AccordionSummary';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import { QuestionType } from '../../../../services/quiz/models';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -41,7 +42,7 @@ type AccordionQuestionProps = {
   panelName: string;
   expanded: string | false;
   component: JSX.Element;
-  title: string;
+  question: QuestionType;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
@@ -51,7 +52,7 @@ const AccordionQuestion = ({
   panelName,
   expanded,
   component,
-  title,
+  question,
   handleChange
 }: AccordionQuestionProps) => {
   return (
@@ -61,7 +62,7 @@ const AccordionQuestion = ({
         onChange={handleChange(panelName)}
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-          <Typography>{title}</Typography>
+          <Typography>{question.title}</Typography>
         </AccordionSummary>
         <AccordionDetails>{component}</AccordionDetails>
       </Accordion>
