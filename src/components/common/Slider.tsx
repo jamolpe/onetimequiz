@@ -54,7 +54,7 @@ const Slider = ({
           if (typeof newValue === 'number') onChangeValue(newValue);
         }}
       />
-      <p className={showError ? 'error' : 'hidde'}>{errorMessage}</p>
+      <p className={showError ? 'error' : 'hide'}>{errorMessage}</p>
     </div>
   );
 };
