@@ -5,7 +5,8 @@ import MuiAccordionSummary, {
   AccordionSummaryProps
 } from '@mui/material/AccordionSummary';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import { QuestionType } from '../../../../services/quiz/models';
+import { QuestionType, TypeOption } from '../../../../services/quiz/models';
+import ViewQuestion from './ViewQuestion';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -41,22 +42,54 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
 type AccordionQuestionProps = {
   panelName: string;
   expanded: string | false;
-  component: JSX.Element;
   question: QuestionType;
+  key: string | number;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
 };
 
+const selectedOption = (options?: TypeOption[]) => {
+  const prevSelected = options?.find((q) => q.selected);
+  return prevSelected
+    ? { id: prevSelected.id, text: prevSelected.text }
+    : undefined;
+};
+
 const AccordionQuestion = ({
   panelName,
   expanded,
-  component,
   question,
+  key,
   handleChange
 }: AccordionQuestionProps) => {
+  const getQuestionOptions = (question: QuestionType) => {
+    switch (question.type) {
+      case 'SELECTOR':
+        return {
+          prevSelectorOptions: question.options?.map((o) => ({
+            id: o.id,
+            text: o.text
+          })),
+          prevSelectedOption: selectedOption(question.options)
+        };
+      case 'TEXT':
+        return {
+          prevMaxCharacters: question.maxCharacters
+        };
+      case 'CHECK':
+        return {
+          prevOptions: question.options?.map((o) => ({
+            id: o.id,
+            text: o.text,
+            selected: o.selected,
+            checked: o.selected
+          }))
+        };
+    }
+  };
   return (
-    <div className="accordion">
+    <div key={key} className="accordion">
       <Accordion
         expanded={expanded === panelName}
         onChange={handleChange(panelName)}
@@ -64,7 +97,12 @@ const AccordionQuestion = ({
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>{question.title}</Typography>
         </AccordionSummary>
-        <AccordionDetails>{component}</AccordionDetails>
+        <AccordionDetails>
+          <ViewQuestion
+            typeQuestion={question.type}
+            options={getQuestionOptions(question)}
+          />
+        </AccordionDetails>
       </Accordion>
     </div>
   );

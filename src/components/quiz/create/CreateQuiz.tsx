@@ -4,6 +4,7 @@ import { QuestionType } from '../../../services/quiz/models';
 import AccordionQuestion from './question/AccordionQuestion';
 import CreateQuestion from './question/CreateQuestion';
 import './CreateQuiz.scss';
+import Formsy from 'formsy-react';
 
 const style = {
   position: 'absolute',
@@ -35,41 +36,42 @@ const CreateQuiz = () => {
     }
   };
   return (
-    <div className="create-container">
-      <div className="title-add">
-        <h1 className="title">Quiz</h1>
-        <div className="add-question">
-          <Button onClick={handleOpen}>Add question</Button>
+    <Formsy>
+      <div className="create-container">
+        <div className="title-add">
+          <h1 className="title">Quiz</h1>
+          <div className="add-question">
+            <Button onClick={handleOpen}>Add question</Button>
+          </div>
+        </div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <CreateQuestion
+              handleClose={handleClose}
+              createQuestion={createNewQuestion}
+            />
+          </Box>
+        </Modal>
+        <div className="accordion-questions">
+          {questions.map((q, i) => {
+            return (
+              <AccordionQuestion
+                key={i}
+                panelName={`panel${i}`}
+                handleChange={handleChange}
+                question={q}
+                expanded={expanded}
+              />
+            );
+          })}
         </div>
       </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <CreateQuestion
-            handleClose={handleClose}
-            createQuestion={createNewQuestion}
-          />
-        </Box>
-      </Modal>
-      <div className="acordion-questions">
-        {questions.map((q, i) => {
-          return (
-            <AccordionQuestion
-              key={i}
-              panelName={`panel${i}`}
-              handleChange={handleChange}
-              question={q}
-              component={<div>{q.type}</div>}
-              expanded={expanded}
-            />
-          );
-        })}
-      </div>
-    </div>
+    </Formsy>
   );
 };
 

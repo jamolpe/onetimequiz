@@ -2,7 +2,7 @@ import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
 import { useState } from 'react';
 import {
-  Option,
+  TypeOption,
   QuestionType,
   questionTypes
 } from '../../../../services/quiz/models';
@@ -41,7 +41,7 @@ const CreateQuestion = ({
       checked: boolean;
     }[],
     questionCheckerInput: string
-  ): Option[] => {
+  ): TypeOption[] => {
     const options: {
       id: number;
       label: string;
@@ -56,12 +56,15 @@ const CreateQuestion = ({
   const transformSelectorOptions = (
     questionSelectorInput: string,
     questionSelector: string
-  ): Option[] => {
-    const options: string[] = JSON.parse(questionSelectorInput);
+  ): TypeOption[] => {
+    const options: { id: number; text: string }[] = JSON.parse(
+      questionSelectorInput
+    );
     return options.map((opt, i) => ({
       id: i,
-      text: opt,
-      correct: questionSelector === opt
+      text: opt.text,
+      correct: questionSelector === opt.id.toString(),
+      selected: questionSelector === opt.id.toString()
     }));
   };
   const createQuestionFromForm = (
@@ -82,7 +85,7 @@ const CreateQuestion = ({
         return {
           type: model.type,
           title: model.title,
-          maxCaracters: model.questionTextMax
+          maxCharacters: model.questionTextMax
         };
       case 'CHECK':
         return {
@@ -116,7 +119,7 @@ const CreateQuestion = ({
           onChangeValue={(value) => setTitle(value)}
           validations={{ minLength: 5 }}
           validationErrors={{
-            minLength: 'size should be more than 5 caracters'
+            minLength: 'size should be more than 5 characters'
           }}
           name="title"
           label="Title"
