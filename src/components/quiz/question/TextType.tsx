@@ -8,7 +8,7 @@ type TextTypeProps = {
 };
 
 const TextType = ({ prevMaxCharacters, viewMode = false }: TextTypeProps) => {
-  const [maxCaracters, setMaxCaracters] = useState<number>(
+  const [maxCharacters, setmaxCharacters] = useState<number>(
     prevMaxCharacters ?? 50
   );
   return (
@@ -16,13 +16,13 @@ const TextType = ({ prevMaxCharacters, viewMode = false }: TextTypeProps) => {
       <Slider
         disabled={viewMode}
         required
-        value={maxCaracters}
+        value={maxCharacters}
         min={0}
         max={100}
         valueLabelDisplay="auto"
         size="small"
         arialabel="non-linear-slider"
-        onChangeValue={(val) => setMaxCaracters(val)}
+        onChangeValue={(val) => setmaxCharacters(val)}
         name="questionTextMax"
         defaultValue={0}
         label="Max length"

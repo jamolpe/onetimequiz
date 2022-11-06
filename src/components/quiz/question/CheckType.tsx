@@ -1,30 +1,19 @@
 import { Button } from '@mui/material';
 import { useState } from 'react';
+import { TypeOption } from '../../../services/quiz/models';
 import Checker from '../../common/Checker';
 import TextInput from '../../common/TextInput';
 
 import './CheckType.scss';
 
 type CheckTypeProps = {
-  prevOptions?: {
-    id: number;
-    value: string | number;
-    label: string | number;
-    checked: boolean;
-  }[];
+  prevOptions?: TypeOption[];
   viewMode?: boolean;
 };
 
 const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
-  const [options, setOptions] = useState<
-    {
-      id: number;
-      value: string | number;
-      label: string | number;
-      checked: boolean;
-    }[]
-  >(prevOptions ?? []);
-  const [newOption, setNewOption] = useState<string | number>('');
+  const [options, setOptions] = useState<TypeOption[]>(prevOptions ?? []);
+  const [newOption, setNewOption] = useState<string>('');
 
   const onChangeOption = (id: number | string) => {
     const index = options.findIndex((opt) => opt.id === id);
@@ -32,7 +21,7 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
       const newOptions = [...options];
       newOptions[index] = {
         ...options[index],
-        checked: !options[index].checked
+        selected: !options[index].selected
       };
       setOptions(newOptions);
     }
@@ -40,12 +29,11 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
 
   const addNewOption = () => {
     const id = options[options.length - 1]?.id;
-    const newId = id !== undefined ? id + 1 : 0;
-    const newOptionToAdd = {
+    const newId = id !== undefined ? +id + 1 : 0;
+    const newOptionToAdd: TypeOption = {
       id: newId,
-      value: newOption,
-      label: newOption,
-      checked: false
+      text: newOption,
+      selected: false
     };
     const newOptions = [...options, newOptionToAdd];
     setOptions(newOptions);
@@ -55,17 +43,17 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
     <div className="type-checker">
       <Checker
         required
+        disabled={viewMode}
         name={'questionChecker'}
-        items={options}
+        items={options.map((o) => ({ label: o.text, value: o }))}
         onChange={onChangeOption}
-        label="New checker option"
+        label={!viewMode ? 'New checker option' : ''}
         value={options.map((op) => ({
-          id: op.id,
-          label: op.label,
-          checked: op.checked
+          value: op,
+          label: op.text
         }))}
       />
-      {!viewMode ?? (
+      {!viewMode && (
         <div className="new-option">
           <TextInput
             label="New Option"

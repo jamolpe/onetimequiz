@@ -2,12 +2,12 @@ import { Button, Radio } from '@mui/material';
 import { useState } from 'react';
 import Selector from '../../common/Selector';
 import TextInput from '../../common/TextInput';
-
+import { TypeOption } from '../../../services/quiz/models';
 import './SelectorType.scss';
 
 type SelectorTypeProps = {
   prevSelectedOption?: string;
-  prevOptions?: (string | number)[];
+  prevOptions?: TypeOption[];
   viewMode?: boolean;
 };
 
@@ -19,13 +19,14 @@ const SelectorType = ({
   const [selectedOption, setSelectedOption] = useState<string>(
     prevSelectedOption ?? ''
   );
-  const [options, setOptions] = useState<(string | number)[]>(
-    prevOptions ?? []
-  );
-  const [newOption, setNewOption] = useState<string | number>('');
+  const [options, setOptions] = useState<TypeOption[]>(prevOptions ?? []);
+  const [newOption, setNewOption] = useState<string>('');
 
   const addNewOption = () => {
-    const newOptions = [...options, newOption];
+    const newOptions = [
+      ...options,
+      { id: options.length + 1, text: newOption }
+    ];
     setOptions(newOptions);
     setNewOption('');
   };
@@ -36,16 +37,16 @@ const SelectorType = ({
         disabled={viewMode}
         name="questionSelector"
         id="questionSelector"
-        items={options.map((op) => ({
+        items={options.map((op, i) => ({
           value: op,
-          control: <Radio />,
-          label: op
+          control: <Radio key={i} />,
+          label: op.text
         }))}
-        label="New selector option"
+        label={!viewMode ? 'New selector option' : ''}
         value={selectedOption}
         onSelect={(val) => setSelectedOption(val.toString())}
       />
-      {viewMode && (
+      {!viewMode && (
         <div className="new-option">
           <TextInput
             label="New Option"
