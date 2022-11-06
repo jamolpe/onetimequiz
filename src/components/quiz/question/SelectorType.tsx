@@ -44,7 +44,10 @@ const SelectorType = ({
         }))}
         label={!viewMode ? 'New selector option' : ''}
         value={selectedOption}
-        onSelect={(val) => setSelectedOption(val.toString())}
+        onSelect={(val) => {
+          console.log(val);
+          setSelectedOption(val.toString());
+        }}
       />
       {!viewMode && (
         <div className="new-option">

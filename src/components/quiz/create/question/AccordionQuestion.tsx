@@ -51,9 +51,7 @@ type AccordionQuestionProps = {
 
 const selectedOption = (options?: TypeOption[]) => {
   const prevSelected = options?.find((q) => q.selected);
-  return prevSelected
-    ? { id: prevSelected.id, text: prevSelected.text }
-    : undefined;
+  return prevSelected?.id;
 };
 
 const AccordionQuestion = ({
