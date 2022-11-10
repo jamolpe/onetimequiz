@@ -9,7 +9,7 @@ type CheckerType = {
   label?: string;
   items: { value: TypeOption; label: string }[];
   isRequired: boolean;
-  value?: { value: TypeOption; label: string }[];
+  value?: TypeOption[];
   showError: boolean;
   errorMessage: string;
   name?: string;
@@ -34,7 +34,7 @@ const Checker = ({
   const checked = items.filter((item) => item.value.selected);
   if (isRequired && checked.length === 0) {
     showError = true;
-    errorMessage = 'At least one item shoud be selected';
+    errorMessage = 'At least one item should be selected';
   }
   return (
     <div className={(showRequired ? 'required' : '') + ' checker'}>
@@ -49,7 +49,7 @@ const Checker = ({
             required={required}
             label={''}
             name={name + 'Input'}
-            value={showError ? '' : JSON.stringify(checked)}
+            value={showError ? '' : JSON.stringify(items.map((c) => c.value))}
           />
         </div>
 

@@ -28,10 +28,8 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
   };
 
   const addNewOption = () => {
-    const id = options[options.length - 1]?.id;
-    const newId = id !== undefined ? +id + 1 : 0;
     const newOptionToAdd: TypeOption = {
-      id: newId,
+      id: options.length + 1,
       text: newOption,
       selected: false
     };
@@ -48,10 +46,7 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
         items={options.map((o) => ({ label: o.text, value: o }))}
         onChange={onChangeOption}
         label={!viewMode ? 'New checker option' : ''}
-        value={options.map((op) => ({
-          value: op,
-          label: op.text
-        }))}
+        value={options}
       />
       {!viewMode && (
         <div className="new-option">
