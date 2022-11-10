@@ -12,8 +12,8 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   minWidth: 600,
-  bgcolor: 'background.paper',
-  border: '1px solid #000',
+  border: '1px solid rgba(255, 255, 255, 0.12)',
+  bgcolor: 'rgb(55, 51, 51)',
   boxShadow: 24,
   p: 5,
   borderRadius: 5
@@ -25,6 +25,7 @@ const CreateQuiz = () => {
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
@@ -35,6 +36,7 @@ const CreateQuiz = () => {
       setQuestions(newQuestions);
     }
   };
+
   return (
     <Formsy>
       <div className="create-container">
@@ -61,7 +63,7 @@ const CreateQuiz = () => {
           {questions.map((q, i) => {
             return (
               <AccordionQuestion
-                key={i}
+                id={i}
                 panelName={`panel${i}`}
                 handleChange={handleChange}
                 question={q}

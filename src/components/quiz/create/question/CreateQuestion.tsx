@@ -17,7 +17,7 @@ type CreateQuestionProps = {
 };
 
 type QuestionDataType = {
-  questionChecker: { id: number; label: string; checked: boolean }[];
+  questionChecker: { id: number; text: string; selected: boolean }[];
   questionCheckerInput: string;
   questionTextMax: number;
   questionSelector: string;
@@ -37,20 +37,15 @@ const CreateQuestion = ({
   const transformCheckerOptions = (
     questionChecker: {
       id: number;
-      label: string;
-      checked: boolean;
-    }[],
-    questionCheckerInput: string
+      text: string;
+      selected: boolean;
+    }[]
   ): TypeOption[] => {
-    const options: {
-      id: number;
-      label: string;
-      checked: boolean;
-    }[] = JSON.parse(questionCheckerInput);
     return questionChecker.map((check) => ({
       id: check.id,
-      text: check.label,
-      checked: options.filter((opt) => check.id === opt.id).length > 0
+      text: check.text,
+      correct: check.selected,
+      selected: check.selected
     }));
   };
   const transformSelectorOptions = (
@@ -91,10 +86,7 @@ const CreateQuestion = ({
         return {
           type: model.type,
           title: model.title,
-          options: transformCheckerOptions(
-            model.questionChecker,
-            model.questionCheckerInput
-          )
+          options: transformCheckerOptions(model.questionChecker)
         };
       default:
         return null;

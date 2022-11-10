@@ -43,7 +43,7 @@ type AccordionQuestionProps = {
   panelName: string;
   expanded: string | false;
   question: QuestionType;
-  key: string | number;
+  id: string | number;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
@@ -58,7 +58,7 @@ const AccordionQuestion = ({
   panelName,
   expanded,
   question,
-  key,
+  id,
   handleChange
 }: AccordionQuestionProps) => {
   const getQuestionOptions = (question: QuestionType) => {
@@ -87,7 +87,7 @@ const AccordionQuestion = ({
     }
   };
   return (
-    <div key={key} className="accordion">
+    <div key={id} className="accordion">
       <Accordion
         expanded={expanded === panelName}
         onChange={handleChange(panelName)}
