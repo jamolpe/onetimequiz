@@ -26,6 +26,7 @@ type TypeView =
   | TypeQuestionViewCheck
   | TypeQuestionViewText;
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const QUESTION_TYPES_COMPONENTS: Record<string, (options: any) => JSX.Element> =
   {
     SELECTOR: ({

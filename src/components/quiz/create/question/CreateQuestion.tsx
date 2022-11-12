@@ -1,19 +1,16 @@
 import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
 import { useState } from 'react';
-import {
-  TypeOption,
-  QuestionType,
-  questionTypes
-} from '../../../../services/quiz/models';
+import { TypeOption, questionTypes } from '../../../../services/quiz/models';
 import DropDown from '../../../common/DropDown';
 import TextInput from '../../../common/TextInput';
 import { TypeQuestionCreate } from './TypeQuestionCreate';
 import './CreateQuestion.scss';
+import { QuestionCreate } from '../CreateQuiz';
 
 type CreateQuestionProps = {
   handleClose: () => void;
-  createQuestion: (model: QuestionType | null) => void;
+  createQuestion: (model: QuestionCreate | null) => void;
 };
 
 type QuestionDataType = {
@@ -64,7 +61,7 @@ const CreateQuestion = ({
   };
   const createQuestionFromForm = (
     model: QuestionDataType
-  ): QuestionType | null => {
+  ): QuestionCreate | null => {
     console.log(model);
     switch (model.type) {
       case 'SELECTOR':

@@ -1,4 +1,5 @@
 import { AccordionDetails, AccordionProps, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import MuiAccordion from '@mui/material/Accordion';
 import { styled } from '@mui/material/styles';
 import MuiAccordionSummary, {
@@ -36,6 +37,9 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
   },
   '& .MuiAccordionSummary-content': {
     marginLeft: theme.spacing(1)
+  },
+  ' & .delete-icon': {
+    marginLeft: 'auto'
   }
 }));
 
@@ -43,7 +47,8 @@ type AccordionQuestionProps = {
   panelName: string;
   expanded: string | false;
   question: QuestionType;
-  id: string | number;
+  id: string;
+  onDeleteClick: (id: string) => void;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
@@ -59,7 +64,8 @@ const AccordionQuestion = ({
   expanded,
   question,
   id,
-  handleChange
+  handleChange,
+  onDeleteClick
 }: AccordionQuestionProps) => {
   const getQuestionOptions = (question: QuestionType) => {
     switch (question.type) {
@@ -94,6 +100,13 @@ const AccordionQuestion = ({
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>{question.title}</Typography>
+          <DeleteIcon
+            onClick={(e) => {
+              e.preventDefault();
+              onDeleteClick(id);
+            }}
+            className="delete-icon"
+          />
         </AccordionSummary>
         <AccordionDetails>
           <ViewQuestion

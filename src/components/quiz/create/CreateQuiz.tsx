@@ -1,6 +1,6 @@
 import { Box, Button, Modal } from '@mui/material';
 import { useState } from 'react';
-import { QuestionType } from '../../../services/quiz/models';
+import { QuestionType, TypeOption } from '../../../services/quiz/models';
 import AccordionQuestion from './question/AccordionQuestion';
 import CreateQuestion from './question/CreateQuestion';
 import './CreateQuiz.scss';
@@ -19,6 +19,14 @@ const style = {
   borderRadius: 5
 };
 
+export type QuestionCreate = {
+  type: string;
+  id?: string;
+  title: string;
+  options?: TypeOption[];
+  maxCharacters?: number | string;
+};
+
 const CreateQuiz = () => {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [expanded, setExpanded] = useState<string | false>('');
@@ -30,9 +38,17 @@ const CreateQuiz = () => {
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
       setExpanded(newExpanded ? panel : false);
     };
-  const createNewQuestion = (model: QuestionType | null) => {
+  const createNewQuestion = (model: QuestionCreate | null) => {
     if (model) {
-      const newQuestions = [...questions, model];
+      const newQ = { ...model, id: (questions.length + 1).toString() };
+      const newQuestions = [...questions, newQ];
+      setQuestions(newQuestions);
+    }
+  };
+
+  const onDeleteClick = (id: string) => {
+    if (id) {
+      const newQuestions = questions.filter((q) => q.id !== id);
       setQuestions(newQuestions);
     }
   };
@@ -63,11 +79,13 @@ const CreateQuiz = () => {
           {questions.map((q, i) => {
             return (
               <AccordionQuestion
-                id={i}
+                id={q.id}
+                key={i}
                 panelName={`panel${i}`}
                 handleChange={handleChange}
                 question={q}
                 expanded={expanded}
+                onDeleteClick={onDeleteClick}
               />
             );
           })}
