@@ -1,11 +1,11 @@
-@import '../../../../index.scss';
+@import '../../../../common.scss';
 .question-create {
   .question-type {
     margin-top: 15px;
     .type-create {
       min-height: 200px;
       margin-top: 15px;
-      background-color: $grey-colour;
+      background-color: $grey-color;
       border-radius: 10px;
       display: flex;
     }
