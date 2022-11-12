@@ -11,9 +11,8 @@ export const questionTypes: Record<string, string> = {
  */
 export interface QuizQuestion {
   type: string;
-  id?: string;
+  id: string;
   title: string;
-  string?: string;
 }
 
 export interface TypeOption {
