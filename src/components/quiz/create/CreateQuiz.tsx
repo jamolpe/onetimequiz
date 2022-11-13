@@ -1,6 +1,11 @@
-import { Box, Button, Modal } from '@mui/material';
+import { Box, Button, InputLabel, Modal, NativeSelect } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { useState } from 'react';
-import { QuestionType, TypeOption } from '../../../services/quiz/models';
+import {
+  QuestionType,
+  QuizCreate,
+  TypeOption
+} from '../../../services/quiz/models';
 import AccordionQuestion from './question/AccordionQuestion';
 import CreateQuestion from './question/CreateQuestion';
 import './CreateQuiz.scss';
@@ -27,9 +32,16 @@ export type QuestionCreate = {
   maxCharacters?: number | string;
 };
 
-const CreateQuiz = () => {
+export type CreateQuizProps = {
+  CreateNewQuiz: (quiz: QuizCreate) => void;
+};
+
+const CreateQuiz = ({ CreateNewQuiz }: CreateQuizProps) => {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [expanded, setExpanded] = useState<string | false>('');
+  const [maxNumUsers, setMaxNumUsers] = useState<number>();
+  const [title, setTitle] = useState<string>('Quiz title');
+
   const [open, setOpen] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -53,13 +65,52 @@ const CreateQuiz = () => {
     }
   };
 
+  const onCreateQuizClick = () => {
+    const quiz = {
+      questions,
+      title: title,
+      numUsers: maxNumUsers ?? 1,
+      created: new Date().toString(),
+      end: (new Date().getDate() + 1).toString()
+    };
+    CreateNewQuiz(quiz);
+  };
+
   return (
     <Formsy>
       <div className="create-container">
         <div className="title-add">
-          <h1 className="title">Quiz</h1>
+          <div className="num-users">
+            <InputLabel variant="standard">Num users</InputLabel>
+            <NativeSelect
+              defaultValue={1}
+              inputProps={{
+                name: 'numUsers'
+              }}
+              value={maxNumUsers}
+              onChange={(e) => setMaxNumUsers(+e.target.value)}
+            >
+              {[...Array(10).keys()].map((i) => {
+                return (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                );
+              })}
+            </NativeSelect>
+          </div>
+          <h1
+            className="title"
+            onBlur={(e) => {
+              setTitle(e.target.innerHTML);
+            }}
+            contentEditable
+            suppressContentEditableWarning
+          >
+            {title}
+          </h1>
           <div className="add-question">
-            <Button onClick={handleOpen}>Add question</Button>
+            <AddIcon onClick={handleOpen} sx={{ fontSize: 40 }} />
           </div>
         </div>
         <Modal
@@ -90,6 +141,11 @@ const CreateQuiz = () => {
             );
           })}
         </div>
+      </div>
+      <div className="create-button">
+        <Button variant="contained" color="success" onClick={onCreateQuizClick}>
+          Create Quiz
+        </Button>
       </div>
     </Formsy>
   );
