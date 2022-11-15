@@ -1,9 +1,12 @@
 {
   "body": {
-    "sharingUrls": ["22222-222222-22222-22222", "333333-333333-333333-333333"],
-    "ownerUrl": "33333-333333-333333-33333",
+    "sharingUrls": [
+      "localhost:3000/22222-222222-22222-22222",
+      "localhost:3000/333333-333333-333333-333333"
+    ],
+    "ownerUrl": "localhost:3000/admin/33333-333333-333333-33333",
     "quiz": {
-      "title": "title quiz",
+      "title": "Title quiz",
       "id": "111111-111111-111111-11111",
       "end": "2022-10-28T18:47:52.136Z",
       "created": "2022-09-28T18:47:52.136Z",
@@ -11,7 +14,7 @@
         {
           "type": "CHECK",
           "id": "111111-111111-111111-11111",
-          "title": "check question title question",
+          "title": "Check question title question",
           "options": [
             { "id": "111111-111111-111111-11111", "text": "first option" },
             { "id": "111111-111111-111111-11112", "text": "second option" },
@@ -21,12 +24,12 @@
         {
           "type": "TEXT",
           "id": "111111-111111-111111-11112",
-          "title": "text question title question"
+          "title": "Text question title question"
         },
         {
           "type": "SELECTOR",
           "id": "111111-111111-111111-11112",
-          "title": "selector question with question?",
+          "title": "Selector question with question?",
           "options": [
             { "id": "111111-111111-111111-11111", "text": "first option" },
             { "id": "111111-111111-111111-11112", "text": "second option" },
