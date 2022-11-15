@@ -69,7 +69,9 @@ const Checker = ({
             />
           );
         })}
-        <p className={showError ? 'error' : 'hide'}>{errorMessage}</p>
+        <p className={showError && !disabled ? 'error' : 'hide'}>
+          {errorMessage}
+        </p>
       </FormControl>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import LabelTitle from '../../common/LabelTitle';
 
 import './ShareSection.scss';
 
@@ -9,12 +10,28 @@ type ShareSectionProps = {
 const ShareSection = ({ sharingUrls, ownerUrl }: ShareSectionProps) => {
   return (
     <div className="share-section">
-      <div className="url-label">
+      <LabelTitle text={'Share with people'} />
+      <div className="sharing-url">
         {sharingUrls.map((url) => {
-          return url;
+          return (
+            <input
+              key={url}
+              defaultValue={url}
+              readOnly
+              onFocus={(event) => event.target.select()}
+            />
+          );
         })}
       </div>
-      <div className="url-label">{ownerUrl}</div>
+      <LabelTitle text={'Admin info'} />
+      <div className="sharing-url">
+        <input
+          onFocus={(event) => event.target.select()}
+          className="url-label"
+          readOnly
+          defaultValue={ownerUrl}
+        />
+      </div>
     </div>
   );
 };
