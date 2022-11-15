@@ -48,7 +48,7 @@ type AccordionQuestionProps = {
   expanded: string | false;
   question: QuestionType;
   id: string;
-  onDeleteClick: (id: string) => void;
+  onDeleteClick?: (id: string) => void;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
@@ -100,13 +100,15 @@ const AccordionQuestion = ({
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>{question.title}</Typography>
-          <DeleteIcon
-            onClick={(e) => {
-              e.preventDefault();
-              onDeleteClick(id);
-            }}
-            className="delete-icon"
-          />
+          {onDeleteClick && (
+            <DeleteIcon
+              onClick={(e) => {
+                e.preventDefault();
+                onDeleteClick(id);
+              }}
+              className="delete-icon"
+            />
+          )}
         </AccordionSummary>
         <AccordionDetails>
           <ViewQuestion

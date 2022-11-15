@@ -1,11 +1,20 @@
 import React from 'react';
 
 import './ShareSection.scss';
-const ShareSection = () => {
+
+type ShareSectionProps = {
+  sharingUrls: string[];
+  ownerUrl: string;
+};
+const ShareSection = ({ sharingUrls, ownerUrl }: ShareSectionProps) => {
   return (
     <div className="share-section">
-      <div className="url-label">uurl share</div>
-      <div className="url-label">admin uuid</div>
+      <div className="url-label">
+        {sharingUrls.map((url) => {
+          return url;
+        })}
+      </div>
+      <div className="url-label">{ownerUrl}</div>
     </div>
   );
 };
