@@ -36,6 +36,7 @@ export interface CheckQuestion extends QuizQuestion {
 }
 
 export interface Quiz {
+  title: string;
   id: string;
   created: string;
   end: string;
@@ -70,7 +71,7 @@ export interface QuizCreate {
 }
 
 export interface QuizCreated {
-  id: string;
-  sharingUrl: string;
+  sharingUrls: string[];
   ownerUrl: string;
+  quiz: Quiz;
 }
