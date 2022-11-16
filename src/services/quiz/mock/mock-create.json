@@ -16,7 +16,11 @@
           "id": "111111-111111-111111-11111",
           "title": "Check question title question",
           "options": [
-            { "id": "111111-111111-111111-11111", "text": "first option" },
+            {
+              "id": "111111-111111-111111-11111",
+              "text": "first option",
+              "selected": true
+            },
             { "id": "111111-111111-111111-11112", "text": "second option" },
             { "id": "111111-111111-111111-11113", "text": "third option" }
           ]
@@ -24,7 +28,8 @@
         {
           "type": "TEXT",
           "id": "111111-111111-111111-11112",
-          "title": "Text question title question"
+          "title": "Text question title question",
+          "maxCharacters": 99
         },
         {
           "type": "SELECTOR",
@@ -32,8 +37,16 @@
           "title": "Selector question with question?",
           "options": [
             { "id": "111111-111111-111111-11111", "text": "first option" },
-            { "id": "111111-111111-111111-11112", "text": "second option" },
-            { "id": "111111-111111-111111-11113", "text": "third option" }
+            {
+              "id": "111111-111111-111111-11112",
+              "text": "second option",
+              "selected": true
+            },
+            {
+              "id": "111111-111111-111111-11113",
+              "text": "third option",
+              "selected": true
+            }
           ]
         }
       ]

@@ -86,8 +86,7 @@ const AccordionQuestion = ({
           prevOptions: question.options?.map((o) => ({
             id: o.id,
             text: o.text,
-            selected: o.selected,
-            checked: o.selected
+            selected: o.selected
           }))
         };
     }

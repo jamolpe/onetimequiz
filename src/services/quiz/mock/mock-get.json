@@ -18,7 +18,8 @@
       {
         "type": "text",
         "id": "111111-111111-111111-11112",
-        "title": "text question title question"
+        "title": "text question title question",
+        "maxCharacters": 50
       },
       {
         "type": "selector",
