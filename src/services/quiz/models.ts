@@ -1,4 +1,4 @@
-export type QuestionType = SelectorQuestion | TextQuestion | CheckQuestion;
+export type QuestionType = SelectorQuestion & TextQuestion & CheckQuestion;
 
 export const questionTypes: Record<string, string> = {
   SELECTOR: 'Selector',
@@ -11,12 +11,11 @@ export const questionTypes: Record<string, string> = {
  */
 export interface QuizQuestion {
   type: string;
-  id?: string;
+  id: string;
   title: string;
-  string?: string;
 }
 
-export interface Option {
+export interface TypeOption {
   id: string | number;
   text: string;
   selected?: boolean;
@@ -24,19 +23,20 @@ export interface Option {
 }
 
 export interface SelectorQuestion extends QuizQuestion {
-  options: Option[];
+  options?: TypeOption[];
 }
 
 export interface TextQuestion extends QuizQuestion {
-  maxCaracters?: number | string;
+  maxCharacters?: number | string;
   response?: string;
 }
 
 export interface CheckQuestion extends QuizQuestion {
-  options: Option[];
+  options?: TypeOption[];
 }
 
 export interface Quiz {
+  title: string;
   id: string;
   created: string;
   end: string;
@@ -47,7 +47,7 @@ export interface Quiz {
  * QUIZ ADMIN
  */
 
-export interface UserRespose {
+export interface UserResponse {
   userName: string;
   date: string;
   questionResponses: QuestionType[];
@@ -56,11 +56,11 @@ export interface UserRespose {
 export interface QuizAdmin {
   id: string;
   quiz: Quiz;
-  usersResponse: UserRespose[];
+  usersResponse: UserResponse[];
 }
 
 /**
- * QUIS CREATE
+ * QUIZ CREATE
  */
 export interface QuizCreate {
   title: string;
@@ -71,7 +71,7 @@ export interface QuizCreate {
 }
 
 export interface QuizCreated {
-  id: string;
-  sharingUrl: string;
+  sharingUrls: string[];
   ownerUrl: string;
+  quiz: Quiz;
 }

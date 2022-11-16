@@ -1,26 +1,20 @@
 import { Button } from '@mui/material';
 import Formsy from 'formsy-react';
 import { useState } from 'react';
-import {
-  CheckQuestion,
-  Option,
-  QuestionType,
-  questionTypes,
-  SelectorQuestion,
-  TextQuestion
-} from '../../../../services/quiz/models';
+import { TypeOption, questionTypes } from '../../../../services/quiz/models';
 import DropDown from '../../../common/DropDown';
 import TextInput from '../../../common/TextInput';
 import { TypeQuestionCreate } from './TypeQuestionCreate';
 import './CreateQuestion.scss';
+import { QuestionCreate } from '../CreateQuiz';
 
 type CreateQuestionProps = {
   handleClose: () => void;
-  createQuestion: (model: QuestionType | null) => void;
+  createQuestion: (model: QuestionCreate | null) => void;
 };
 
 type QuestionDataType = {
-  questionChecker: { id: number; label: string; checked: boolean }[];
+  questionChecker: { id: number; text: string; selected: boolean }[];
   questionCheckerInput: string;
   questionTextMax: number;
   questionSelector: string;
@@ -40,36 +34,34 @@ const CreateQuestion = ({
   const transformCheckerOptions = (
     questionChecker: {
       id: number;
-      label: string;
-      checked: boolean;
-    }[],
-    questionCheckerInput: string
-  ): Option[] => {
-    const options: {
-      id: number;
-      label: string;
-      checked: boolean;
-    }[] = JSON.parse(questionCheckerInput);
+      text: string;
+      selected: boolean;
+    }[]
+  ): TypeOption[] => {
     return questionChecker.map((check) => ({
       id: check.id,
-      text: check.label,
-      checked: options.filter((opt) => check.id === opt.id).length > 0
+      text: check.text,
+      correct: check.selected,
+      selected: check.selected
     }));
   };
   const transformSelectorOptions = (
     questionSelectorInput: string,
     questionSelector: string
-  ): Option[] => {
-    const options: string[] = JSON.parse(questionSelectorInput);
+  ): TypeOption[] => {
+    const options: { id: number; text: string }[] = JSON.parse(
+      questionSelectorInput
+    );
     return options.map((opt, i) => ({
       id: i,
-      text: opt,
-      correct: questionSelector === opt
+      text: opt.text,
+      correct: questionSelector === opt.id.toString(),
+      selected: questionSelector === opt.id.toString()
     }));
   };
   const createQuestionFromForm = (
     model: QuestionDataType
-  ): QuestionType | null => {
+  ): QuestionCreate | null => {
     console.log(model);
     switch (model.type) {
       case 'SELECTOR':
@@ -85,16 +77,13 @@ const CreateQuestion = ({
         return {
           type: model.type,
           title: model.title,
-          maxCaracters: model.questionTextMax
+          maxCharacters: model.questionTextMax
         };
       case 'CHECK':
         return {
           type: model.type,
           title: model.title,
-          options: transformCheckerOptions(
-            model.questionChecker,
-            model.questionCheckerInput
-          )
+          options: transformCheckerOptions(model.questionChecker)
         };
       default:
         return null;
@@ -119,7 +108,7 @@ const CreateQuestion = ({
           onChangeValue={(value) => setTitle(value)}
           validations={{ minLength: 5 }}
           validationErrors={{
-            minLength: 'size should be more than 5 caracters'
+            minLength: 'size should be more than 5 characters'
           }}
           name="title"
           label="Title"

@@ -23,7 +23,7 @@ export const postCreateQuiz = async (
     const mockResp = await new Promise<ApiResponse<QuizCreated>>((resolve) => {
       setTimeout(() => {
         resolve(mockCreate());
-      }, 2000);
+      }, 5000);
     });
     return mockResp;
   }

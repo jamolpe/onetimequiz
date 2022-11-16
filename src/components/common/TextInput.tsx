@@ -37,7 +37,7 @@ const TextInput = ({
         value={value || ''}
         onChange={(e) => onChangeValue && onChangeValue(e.currentTarget.value)}
       />
-      <p className={showError ? 'error' : 'hidde'}>{errorMessage}</p>
+      <p className={showError ? 'error' : 'hide'}>{errorMessage}</p>
     </div>
   );
 };

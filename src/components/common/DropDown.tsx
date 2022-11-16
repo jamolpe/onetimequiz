@@ -47,7 +47,7 @@ const DropDown = ({
             );
           })}
         </Select>
-        <p className={showError ? 'error' : 'hidde'}>{errorMessage}</p>
+        <p className={showError ? 'error' : 'hide'}>{errorMessage}</p>
       </FormControl>
     </div>
   );

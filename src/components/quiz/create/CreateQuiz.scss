@@ -8,24 +8,34 @@
     left: '50%';
     position: absolute;
   }
+  .num-users {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
   .title-add {
     display: flex;
-    flex-direction: row;
     width: 100%;
+    align-items: center;
     .title {
       display: flex;
       width: 100%;
-      justify-content: flex-end;
+      justify-content: center;
     }
     .add-question {
       display: flex;
-      width: 100%;
-      justify-content: flex-end;
-      align-content: center;
-      align-items: center;
+      margin-left: auto;
+      :hover {
+        cursor: pointer;
+      }
     }
   }
-  .acordion-questions {
+  .accordion-questions {
     width: 100%;
   }
+}
+.create-button {
+  display: flex;
+  margin-bottom: 20px;
+  justify-content: center;
 }

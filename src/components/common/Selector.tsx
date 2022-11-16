@@ -1,5 +1,6 @@
 import { FormControl, FormControlLabel, RadioGroup } from '@mui/material';
 import { withFormsy } from 'formsy-react';
+import { TypeOption } from '../../services/quiz/models';
 
 import './Selector.scss';
 import TextInput from './TextInput';
@@ -8,9 +9,9 @@ type SelectorType = {
   id: string;
   label?: string;
   items: {
-    value: string | number;
+    value: TypeOption;
     control: JSX.Element;
-    label: string | number;
+    label: string;
   }[];
   isRequired: boolean;
   value?: string | number;
@@ -18,6 +19,7 @@ type SelectorType = {
   errorMessage: string;
   name?: string;
   showRequired: boolean;
+  disabled?: boolean;
   onSelect: (value: string | number) => void;
 };
 
@@ -31,6 +33,7 @@ const Selector = ({
   name,
   items,
   showRequired,
+  disabled = false,
   onSelect
 }: SelectorType) => {
   return (
@@ -40,14 +43,12 @@ const Selector = ({
           {label} {isRequired ? '*' : null}
         </span>
       )}
-      <FormControl>
+      <FormControl disabled={disabled}>
         <div className="input-selector">
           <TextInput
             label={''}
             name={name + 'Input'}
-            value={
-              showError ? '' : JSON.stringify(items.map((item) => item.value))
-            }
+            value={showError ? '' : JSON.stringify(items.map((i) => i.value))}
           />
         </div>
         <RadioGroup
@@ -60,14 +61,14 @@ const Selector = ({
             return (
               <FormControlLabel
                 key={i}
-                value={item.value}
+                value={item.value.id}
                 control={item.control}
                 label={item.label}
               />
             );
           })}
         </RadioGroup>
-        <p className={showError ? 'error' : 'hidde'}>{errorMessage}</p>
+        <p className={showError ? 'error' : 'hide'}>{errorMessage}</p>
       </FormControl>
     </div>
   );

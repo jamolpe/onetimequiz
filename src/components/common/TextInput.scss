@@ -1,24 +1,21 @@
-@import '../../index.scss';
-.error {
-  color: #d32f2f;
-}
+@import '../../common.scss';
 
 .text-input {
   display: flex;
   flex-direction: column;
 }
 
-.hidde {
+.hide {
   display: none;
 }
 
 .text-field {
   & label.Mui-focused {
-    color: $selected-colour;
+    color: $selected-color;
   }
   & .MuiOutlinedInput-root {
     &.Mui-focused fieldset {
-      border-color: $selected-colour;
+      border-color: $selected-color;
     }
   }
 }
