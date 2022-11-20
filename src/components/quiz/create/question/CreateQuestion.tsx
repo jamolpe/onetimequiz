@@ -14,7 +14,7 @@ type CreateQuestionProps = {
 };
 
 type QuestionDataType = {
-  questionChecker: { id: number; text: string; selected: boolean }[];
+  questionChecker: { id: string; text: string; selected: boolean }[];
   questionCheckerInput: string;
   questionTextMax: number;
   questionSelector: string;
@@ -33,7 +33,7 @@ const CreateQuestion = ({
 
   const transformCheckerOptions = (
     questionChecker: {
-      id: number;
+      id: string;
       text: string;
       selected: boolean;
     }[]
@@ -41,7 +41,6 @@ const CreateQuestion = ({
     return questionChecker.map((check) => ({
       id: check.id,
       text: check.text,
-      correct: check.selected,
       selected: check.selected
     }));
   };
@@ -49,13 +48,12 @@ const CreateQuestion = ({
     questionSelectorInput: string,
     questionSelector: string
   ): TypeOption[] => {
-    const options: { id: number; text: string }[] = JSON.parse(
+    const options: { id: string; text: string }[] = JSON.parse(
       questionSelectorInput
     );
     return options.map((opt, i) => ({
-      id: i,
+      id: i.toString(),
       text: opt.text,
-      correct: questionSelector === opt.id.toString(),
       selected: questionSelector === opt.id.toString()
     }));
   };

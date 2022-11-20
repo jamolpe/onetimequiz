@@ -29,7 +29,7 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
 
   const addNewOption = () => {
     const newOptionToAdd: TypeOption = {
-      id: options.length + 1,
+      id: (options.length + 1).toString(),
       text: newOption,
       selected: false
     };
