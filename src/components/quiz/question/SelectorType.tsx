@@ -25,7 +25,7 @@ const SelectorType = ({
   const addNewOption = () => {
     const newOptions = [
       ...options,
-      { id: options.length + 1, text: newOption }
+      { id: (options.length + 1).toString(), text: newOption }
     ];
     setOptions(newOptions);
     setNewOption('');

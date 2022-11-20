@@ -5,9 +5,9 @@ import './ShareSection.scss';
 
 type ShareSectionProps = {
   sharingUrls: string[];
-  ownerUrl: string;
+  adminUrl: string;
 };
-const ShareSection = ({ sharingUrls, ownerUrl }: ShareSectionProps) => {
+const ShareSection = ({ sharingUrls, adminUrl }: ShareSectionProps) => {
   return (
     <div className="share-section">
       <LabelTitle text={'Share with people'} />
@@ -16,7 +16,7 @@ const ShareSection = ({ sharingUrls, ownerUrl }: ShareSectionProps) => {
           return (
             <input
               key={url}
-              defaultValue={url}
+              defaultValue={window.location.origin + url}
               readOnly
               onFocus={(event) => event.target.select()}
             />
@@ -29,7 +29,7 @@ const ShareSection = ({ sharingUrls, ownerUrl }: ShareSectionProps) => {
           onFocus={(event) => event.target.select()}
           className="url-label"
           readOnly
-          defaultValue={ownerUrl}
+          defaultValue={window.location.origin + adminUrl}
         />
       </div>
     </div>

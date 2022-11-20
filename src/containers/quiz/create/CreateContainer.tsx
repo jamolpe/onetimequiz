@@ -29,7 +29,7 @@ const CreateContainer = () => {
             component={
               <ShareSection
                 sharingUrls={createdQuiz.sharingUrls}
-                ownerUrl={createdQuiz.ownerUrl}
+                adminUrl={createdQuiz.adminUrl}
               />
             }
           />

@@ -17,7 +17,7 @@ const mockGetAdmin = () => {
 };
 
 export const postCreateQuiz = async (
-  userData: QuizCreate
+  quizData: QuizCreate
 ): Promise<ApiResponse<QuizCreated>> => {
   if (process.env.REACT_APP_USEMOCK) {
     const mockResp = await new Promise<ApiResponse<QuizCreated>>((resolve) => {
@@ -27,9 +27,9 @@ export const postCreateQuiz = async (
     });
     return mockResp;
   }
-  const response = await fetch(`/quiz/create`, {
+  const response = await fetch(`/api/quiz`, {
     method: 'POST',
-    body: JSON.stringify(userData),
+    body: JSON.stringify(quizData),
     headers: {
       'Content-Type': 'application/json'
     }
@@ -46,7 +46,7 @@ export const getQuiz = async (uuid: string): Promise<ApiResponse<Quiz>> => {
     });
     return mockResp;
   }
-  const response = await fetch(`/quiz/${uuid}`, {
+  const response = await fetch(`/api/quiz/${uuid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export const getAdminQuiz = async (
     });
     return mockResp;
   }
-  const response = await fetch(`/quiz/admin/${uuid}`, {
+  const response = await fetch(`/api/quiz/admin/${uuid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'

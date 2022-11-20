@@ -16,10 +16,9 @@ export interface QuizQuestion {
 }
 
 export interface TypeOption {
-  id: string | number;
+  id: string;
   text: string;
   selected?: boolean;
-  correct?: boolean;
 }
 
 export interface SelectorQuestion extends QuizQuestion {
@@ -28,7 +27,6 @@ export interface SelectorQuestion extends QuizQuestion {
 
 export interface TextQuestion extends QuizQuestion {
   maxCharacters?: number | string;
-  response?: string;
 }
 
 export interface CheckQuestion extends QuizQuestion {
@@ -72,6 +70,6 @@ export interface QuizCreate {
 
 export interface QuizCreated {
   sharingUrls: string[];
-  ownerUrl: string;
+  adminUrl: string;
   quiz: Quiz;
 }
