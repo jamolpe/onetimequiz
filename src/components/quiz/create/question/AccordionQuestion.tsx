@@ -52,6 +52,7 @@ type AccordionQuestionProps = {
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
+  viewMode: boolean;
 };
 
 const selectedOption = (options?: TypeOption[]) => {
@@ -65,7 +66,8 @@ const AccordionQuestion = ({
   question,
   id,
   handleChange,
-  onDeleteClick
+  onDeleteClick,
+  viewMode = false
 }: AccordionQuestionProps) => {
   const getQuestionOptions = (question: QuestionType) => {
     switch (question.type) {
@@ -112,7 +114,7 @@ const AccordionQuestion = ({
         <AccordionDetails>
           <ViewQuestion
             typeQuestion={question.type}
-            options={getQuestionOptions(question)}
+            options={{ ...getQuestionOptions(question), viewMode }}
           />
         </AccordionDetails>
       </Accordion>

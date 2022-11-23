@@ -11,14 +11,17 @@ type TypeQuestionViewType = {
 type TypeQuestionViewSelector = {
   prevSelectorOptions?: TypeOption[];
   prevSelectedOption: string;
+  viewMode: boolean;
 };
 
 type TypeQuestionViewText = {
   prevMaxCharacters?: number;
+  viewMode: boolean;
 };
 
 type TypeQuestionViewCheck = {
   prevOptions?: TypeOption[];
+  viewMode: boolean;
 };
 
 type TypeView =
@@ -31,21 +34,24 @@ const QUESTION_TYPES_COMPONENTS: Record<string, (options: any) => JSX.Element> =
   {
     SELECTOR: ({
       prevSelectorOptions,
-      prevSelectedOption
+      prevSelectedOption,
+      viewMode
     }: TypeQuestionViewSelector) => {
       return (
         <SelectorType
-          viewMode
+          viewMode={viewMode}
           prevOptions={prevSelectorOptions}
           prevSelectedOption={prevSelectedOption}
         />
       );
     },
-    TEXT: ({ prevMaxCharacters }: TypeQuestionViewText) => {
-      return <TextType viewMode prevMaxCharacters={prevMaxCharacters} />;
+    TEXT: ({ prevMaxCharacters, viewMode }: TypeQuestionViewText) => {
+      return (
+        <TextType viewMode={viewMode} prevMaxCharacters={prevMaxCharacters} />
+      );
     },
-    CHECK: ({ prevOptions }: TypeQuestionViewCheck) => {
-      return <CheckType viewMode prevOptions={prevOptions} />;
+    CHECK: ({ prevOptions, viewMode }: TypeQuestionViewCheck) => {
+      return <CheckType viewMode={viewMode} prevOptions={prevOptions} />;
     }
   };
 const ViewQuestion = ({ typeQuestion, options }: TypeQuestionViewType) => {

@@ -9,13 +9,13 @@ type TypeQuestionCreateType = {
 
 const QUESTION_TYPES_COMPONENTS: Record<string, () => JSX.Element> = {
   SELECTOR: () => {
-    return <SelectorType />;
+    return <SelectorType createMode />;
   },
   TEXT: () => {
     return <TextType />;
   },
   CHECK: () => {
-    return <CheckType />;
+    return <CheckType createMode />;
   }
 };
 export const TypeQuestionCreate = ({
