@@ -29,6 +29,7 @@ const FillQuiz = ({ quiz }: FillQuizProps) => {
                 handleChange={handleChange}
                 question={q}
                 expanded={expanded}
+                viewMode={false}
               />
             );
           })}
