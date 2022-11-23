@@ -29,6 +29,7 @@ const CreateQuizResult = ({ quiz }: CreateQuizResultProps) => {
                 handleChange={handleChange}
                 question={q}
                 expanded={expanded}
+                viewMode={true}
               />
             );
           })}

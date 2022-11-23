@@ -9,12 +9,14 @@ type SelectorTypeProps = {
   prevSelectedOption?: string;
   prevOptions?: TypeOption[];
   viewMode?: boolean;
+  createMode?: boolean;
 };
 
 const SelectorType = ({
   prevSelectedOption,
   prevOptions,
-  viewMode = false
+  viewMode = false,
+  createMode = false
 }: SelectorTypeProps) => {
   const [selectedOption, setSelectedOption] = useState<string>(
     prevSelectedOption ?? ''
@@ -49,7 +51,7 @@ const SelectorType = ({
           setSelectedOption(val.toString());
         }}
       />
-      {!viewMode && (
+      {!viewMode && createMode && (
         <div className="new-option">
           <TextInput
             label="New Option"

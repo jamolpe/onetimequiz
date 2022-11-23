@@ -9,9 +9,14 @@ import './CheckType.scss';
 type CheckTypeProps = {
   prevOptions?: TypeOption[];
   viewMode?: boolean;
+  createMode?: boolean;
 };
 
-const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
+const CheckType = ({
+  prevOptions,
+  viewMode = false,
+  createMode = false
+}: CheckTypeProps) => {
   const [options, setOptions] = useState<TypeOption[]>(prevOptions ?? []);
   const [newOption, setNewOption] = useState<string>('');
 
@@ -48,7 +53,7 @@ const CheckType = ({ prevOptions, viewMode = false }: CheckTypeProps) => {
         label={!viewMode ? 'New checker option' : ''}
         value={options}
       />
-      {!viewMode && (
+      {!viewMode && createMode && (
         <div className="new-option">
           <TextInput
             label="New Option"

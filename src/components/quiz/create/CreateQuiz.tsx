@@ -137,6 +137,7 @@ const CreateQuiz = ({ CreateNewQuiz }: CreateQuizProps) => {
                 question={q}
                 expanded={expanded}
                 onDeleteClick={onDeleteClick}
+                viewMode={false}
               />
             );
           })}
