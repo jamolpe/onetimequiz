@@ -1,7 +1,19 @@
 import React from 'react';
+import { TypeOption } from '../../../../services/quiz/models';
 
-const CheckFillType = () => {
-  return <div>CheckFillType</div>;
+type CheckFillTypeProps = {
+  options?: TypeOption[];
+};
+
+const CheckFillType = ({ options }: CheckFillTypeProps) => {
+  return (
+    <div>
+      {options &&
+        options.map((op) => {
+          return <div>{op.text}</div>;
+        })}
+    </div>
+  );
 };
 
 export default CheckFillType;

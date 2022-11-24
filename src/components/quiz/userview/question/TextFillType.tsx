@@ -1,7 +1,10 @@
 import React from 'react';
+type TextFillTypeProps = {
+  maxCharacters?: number;
+};
 
-const TextFillType = () => {
-  return <div>TextFillType</div>;
+const TextFillType = ({ maxCharacters }: TextFillTypeProps) => {
+  return <div>{maxCharacters ?? 150}</div>;
 };
 
 export default TextFillType;

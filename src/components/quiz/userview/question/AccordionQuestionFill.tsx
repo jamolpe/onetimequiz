@@ -60,6 +60,22 @@ const AccordionQuestionFill = ({
   id,
   handleChange
 }: AccordionQuestionFillProps) => {
+  const getQuestionOptions = (question: QuestionType) => {
+    switch (question.type) {
+      case 'SELECTOR':
+        return {
+          options: question.options
+        };
+      case 'TEXT':
+        return {
+          maxCharacters: question.maxCharacters
+        };
+      case 'CHECK':
+        return {
+          options: question.options
+        };
+    }
+  };
   return (
     <div key={id} className="accordion">
       <Accordion
@@ -72,7 +88,7 @@ const AccordionQuestionFill = ({
         <AccordionDetails>
           <FillQuestion
             typeQuestion={question.type}
-            options={question.options}
+            options={getQuestionOptions(question)}
           />
         </AccordionDetails>
       </Accordion>

@@ -1,23 +1,38 @@
 import React from 'react';
+import { TypeOption } from '../../../../services/quiz/models';
 import CheckFillType from './CheckFillType';
 import SelectorFillType from './SelectorFillType';
 import TextFillType from './TextFillType';
 
 type FillQuestionProps = {
   typeQuestion: string;
-  options: any;
+  options?: FillQType;
 };
+
+type SelectorFillTypeProps = {
+  options?: TypeOption[];
+};
+
+type TextFillTypeProps = {
+  maxCharacters?: number;
+};
+
+type CheckFillTypeProps = {
+  options?: TypeOption[];
+};
+
+type FillQType = SelectorFillTypeProps | TextFillTypeProps | CheckFillTypeProps;
 
 const QUESTION_TYPES_COMPONENTS: Record<string, (options: any) => JSX.Element> =
   {
-    SELECTOR: () => {
-      return <SelectorFillType />;
+    SELECTOR: ({ options }: SelectorFillTypeProps) => {
+      return <SelectorFillType options={options} />;
     },
-    TEXT: () => {
-      return <TextFillType />;
+    TEXT: ({ maxCharacters }: TextFillTypeProps) => {
+      return <TextFillType maxCharacters={maxCharacters} />;
     },
-    CHECK: () => {
-      return <CheckFillType />;
+    CHECK: ({ options }: CheckFillTypeProps) => {
+      return <CheckFillType options={options} />;
     }
   };
 
