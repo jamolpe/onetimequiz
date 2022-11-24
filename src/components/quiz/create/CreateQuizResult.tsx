@@ -1,7 +1,7 @@
 import Formsy from 'formsy-react';
 import { useState } from 'react';
 import { Quiz } from '../../../services/quiz/models';
-import AccordionQuestion from './question/AccordionQuestion';
+import AccordionQuestionCreate from './question/AccordionQuestion';
 import './CreateQuizResult.scss';
 
 type CreateQuizResultProps = {
@@ -22,7 +22,7 @@ const CreateQuizResult = ({ quiz }: CreateQuizResultProps) => {
         <div className="accordion-questions">
           {questions.map((q, i) => {
             return (
-              <AccordionQuestion
+              <AccordionQuestionCreate
                 id={q.id}
                 key={i}
                 panelName={`panel${i}`}

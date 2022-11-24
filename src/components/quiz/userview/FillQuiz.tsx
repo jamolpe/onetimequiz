@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Quiz } from '../../../services/quiz/models';
 import Formsy from 'formsy-react';
-import AccordionQuestion from '../create/question/AccordionQuestion';
 import './FillQuiz.scss';
+import AccordionQuestionFill from './question/AccordionQuestionFill';
 
 type FillQuizProps = {
   quiz: Quiz;
@@ -22,14 +22,13 @@ const FillQuiz = ({ quiz }: FillQuizProps) => {
         <div className="accordion-questions">
           {quiz.questions.map((q, i) => {
             return (
-              <AccordionQuestion
-                id={q.id}
+              <AccordionQuestionFill
+                id={i.toString()}
                 key={i}
                 panelName={`panel${i}`}
                 handleChange={handleChange}
                 question={q}
                 expanded={expanded}
-                viewMode={false}
               />
             );
           })}

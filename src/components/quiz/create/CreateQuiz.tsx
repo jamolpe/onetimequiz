@@ -6,7 +6,7 @@ import {
   QuizCreate,
   TypeOption
 } from '../../../services/quiz/models';
-import AccordionQuestion from './question/AccordionQuestion';
+import AccordionQuestionCreate from './question/AccordionQuestion';
 import CreateQuestion from './question/CreateQuestion';
 import './CreateQuiz.scss';
 import Formsy from 'formsy-react';
@@ -129,7 +129,7 @@ const CreateQuiz = ({ CreateNewQuiz }: CreateQuizProps) => {
         <div className="accordion-questions">
           {questions.map((q, i) => {
             return (
-              <AccordionQuestion
+              <AccordionQuestionCreate
                 id={q.id}
                 key={i}
                 panelName={`panel${i}`}

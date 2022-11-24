@@ -1,13 +1,13 @@
+import React from 'react';
+import { QuestionType } from '../../../../services/quiz/models';
 import { AccordionDetails, AccordionProps, Typography } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MuiAccordion from '@mui/material/Accordion';
 import { styled } from '@mui/material/styles';
+import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary, {
   AccordionSummaryProps
 } from '@mui/material/AccordionSummary';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
-import { QuestionType, TypeOption } from '../../../../services/quiz/models';
-import ViewQuestion from './ViewQuestion';
+import FillQuestion from './FillQuestion';
 
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -43,56 +43,23 @@ const AccordionSummary = styled((props: AccordionSummaryProps) => (
   }
 }));
 
-type AccordionQuestionProps = {
+type AccordionQuestionFillProps = {
   panelName: string;
   expanded: string | false;
   question: QuestionType;
   id: string;
-  onDeleteClick?: (id: string) => void;
   handleChange: (
     panel: string
   ) => (event: React.SyntheticEvent, newExpanded: boolean) => void;
-  viewMode: boolean;
 };
 
-const selectedOption = (options?: TypeOption[]) => {
-  const prevSelected = options?.find((q) => q.selected);
-  return prevSelected?.id;
-};
-
-const AccordionQuestionCreate = ({
+const AccordionQuestionFill = ({
   panelName,
   expanded,
   question,
   id,
-  handleChange,
-  onDeleteClick,
-  viewMode = false
-}: AccordionQuestionProps) => {
-  const getQuestionOptions = (question: QuestionType) => {
-    switch (question.type) {
-      case 'SELECTOR':
-        return {
-          prevSelectorOptions: question.options?.map((o) => ({
-            id: o.id,
-            text: o.text
-          })),
-          prevSelectedOption: selectedOption(question.options)
-        };
-      case 'TEXT':
-        return {
-          prevMaxCharacters: question.maxCharacters
-        };
-      case 'CHECK':
-        return {
-          prevOptions: question.options?.map((o) => ({
-            id: o.id,
-            text: o.text,
-            selected: o.selected
-          }))
-        };
-    }
-  };
+  handleChange
+}: AccordionQuestionFillProps) => {
   return (
     <div key={id} className="accordion">
       <Accordion
@@ -101,20 +68,11 @@ const AccordionQuestionCreate = ({
       >
         <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
           <Typography>{question.title}</Typography>
-          {onDeleteClick && (
-            <DeleteIcon
-              onClick={(e) => {
-                e.preventDefault();
-                onDeleteClick(id);
-              }}
-              className="delete-icon"
-            />
-          )}
         </AccordionSummary>
         <AccordionDetails>
-          <ViewQuestion
+          <FillQuestion
             typeQuestion={question.type}
-            options={{ ...getQuestionOptions(question), viewMode }}
+            options={question.options}
           />
         </AccordionDetails>
       </Accordion>
@@ -122,4 +80,4 @@ const AccordionQuestionCreate = ({
   );
 };
 
-export default AccordionQuestionCreate;
+export default AccordionQuestionFill;
