@@ -36,6 +36,10 @@ const Selector = ({
   disabled = false,
   onSelect
 }: SelectorType) => {
+  if (isRequired && !value) {
+    showError = true;
+    errorMessage = 'At least one item should be selected';
+  }
   return (
     <div className={(showRequired ? 'required' : '') + ' selector'}>
       {label && (
@@ -68,7 +72,7 @@ const Selector = ({
             );
           })}
         </RadioGroup>
-        <p className={showError ? 'error' : 'hide'}>{errorMessage}</p>
+        <p className={'error'}>{errorMessage}</p>
       </FormControl>
     </div>
   );
