@@ -63,16 +63,13 @@ const AccordionQuestionFill = ({
   const getQuestionOptions = (question: QuestionType) => {
     switch (question.type) {
       case 'SELECTOR':
+      case 'CHECK':
         return {
           options: question.options
         };
       case 'TEXT':
         return {
           maxCharacters: question.maxCharacters
-        };
-      case 'CHECK':
-        return {
-          options: question.options
         };
     }
   };
